@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>会员展示</title>
+		<!-- meta使用viewport以确保页面可自由缩放 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="css/base.css"/>
+	</head>
+    <body>
+	  <div class="header">
+	  	会员展示
+	  </div>
+	  <div id="seach">
+	  	
+	  	<input type="text" name="seachtxt" id="seachtxt" placeholder=" 会员代码、会员名称" />
+	  	
+	  	<img src="img/sousuo.png" width="24" class="sousuo" id="sousuo"/>
+	 
+	  	
+	  </div>
+	  <div class="content">
+	  	<a class="box" href="list.html?type=1">
+	  		私募基金管理人
+	  	</a>
+	  	<!--<a class="box" href="list.html?type=2">-->
+	  		<!--基金服务机构-->
+	  	<!--</a>-->
+	  	<a class="box" href="list.html?type=3">
+	  		会计师事务所
+	  	</a>
+	  	<a class="box" href="list.html?type=4">
+	  		律师事务所
+	  	</a>
+	  	<a class="box" href="list.html?type=5">
+	  		期货经营机构
+	  	</a>
+	  	<a class="box" href="list.html?type=6">
+	  		证券经营机构
+	  	</a>
+	  	<a class="box" href="list.html?type=7">
+	  		银行
+	  	</a>
+	  </div>
+    </body>
+	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$('#sousuo').click(function(){
+			var k=$('#seachtxt').val();
+			if(k) {
+					window.location.href="list.html?search="+ k;
+				}
+		});
+		$('#seachtxt').keydown(function(e) {
+				if(e.keyCode == 13) {
+					$('#sousuo').click(); //处理事件
+				}
+			});
+	</script>
+</html>

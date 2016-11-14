@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="text">
+		
+	</div>
+	<script type="text/javascript">
+		$.ajax({
+			type:"get",
+			url:"http://testwx.nbguohe.top/index.php/guohe/weixin/getTextRecord?username=gh_3e8703d7490f&useropenid=o8J2PwgqBdE0IQ6ZwtcyfnqYNcfw&start=1",
+			async:true,
+			dataType:"json",
+			success:function(data){
+//				$("#text").append(data[0].message_flag);
+//				console.log(data[0].message_value);
+				var a = $.parseXML(data[0].message_value);
+//				debugger;
+				$("#text").append($(a).find("ToUserName").text()+"<br/>");
+				$("#text").append($(a).find("FromUserName").text()+"<br/>");
+				$("#text").append($(a).find("CreateTime").text()+"<br/>");
+				$("#text").append($(a).find("MsgType").text()+"<br/>");
+				$("#text").append($(a).find("Content").text()+"<br/>");
+				$("#text").append($(a).find("MsgId").text()+"<br/>");
+				console.log($(a).find("ToUserName"));
+//				$("#text").append($(data[0].message_value).find("MsgId").text());
+			}
+		});
+	</script>
+</body>
+</html>

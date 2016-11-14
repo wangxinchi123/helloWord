@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/picManage.css"/>
+		<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="promptBox"></div>
+		<div class="pic-manage">
+			<div id="frame-bg"></div>
+			<div class="pic-show J_picShow"><img src=""/></div>
+			<div class="box-add J_addBox">
+				<div id="close1"><img src="img/close.png"/></div>
+				<p class="tishi"></p>
+				<input class="pic-title J_picTitle" type="text" name="" id="" value="请输入图片标题" />
+				<select class="pic-site" name="" id="">
+					<!--<option value="1" selected >请选择位置</option>-->
+					<option value="b">轮播位</option>
+					<option value="a">广告位</option>
+				</select>
+				<div class="sort">
+					<input type="text" name="" id="" value="请输入数字" />
+					<div>(数字越大，越排前面)</div>
+				</div>
+				<div class="upload_doc">
+					<div>请选择图片</div>
+					<input type="file" class="checkfile" name="file" id="doc1" onchange="imgToDate('1')" accept="image/*">
+
+					<canvas id="cans1"></canvas>
+					<img id="ret">
+				</div>
+				<input type="button" name="" id="sub" value="提交" />
+			</div>
+			<ul class="J_picInfo">
+				<li>
+					<div class="pic-title">标题</div>
+					<div class="pic-site">位置</div>
+					<div class="pic-sort">排序</div>
+				</li>
+			</ul>
+			<button class="pic-add" onclick="showAddBox()">添加</button>
+		</div>
+		<script src="js/picManage.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

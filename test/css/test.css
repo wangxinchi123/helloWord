@@ -1,0 +1,15 @@
+.content {
+  width: 100px;
+  height: 100px;
+  border-right: 30px;
+  border-bottom: 30px;
+  background-color: red;
+}
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  box-shadow: 0px 5px 10px #000;
+  margin-bottom: -10px;
+  margin-left: 15px;
+}

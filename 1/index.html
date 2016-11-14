@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <style type="text/css">
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.wrap{
+    		position: relative;
+    		width: 30%;
+    		margin: 0 auto;
+    		margin-top: 50px;
+    	}
+    	.wrap li{
+    		position: relative;
+    		list-style: none;
+    		padding: 10px 10px;
+    		border: 1px dotted white;
+    	}
+    	.wrap li:hover{
+    		border: 1px dotted gray;
+    	}
+    	.liSelectColor{
+    		background-color: lightgray;
+    	}
+    	.wrap input{
+    		width: 100%;
+    		box-sizing: border-box;
+    	}
+    	.copy{
+    		position: absolute;
+    		top: 0;
+    		left: 0;
+    		width: 100%;
+    		display: none;
+    		opacity: 0.8;
+    		z-index: 6;
+    	}
+
+    	.wrap .close{
+    		position: absolute;
+    		top: 0;
+    		right: 0;
+    		width: 20px;
+    		height: 20px;
+    		display: none;
+    		cursor: pointer;
+    	}
+    	.copy .close{
+    		display: block;
+    	}
+    </style>
+    <script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="copy">
+		</div>
+		<ul>
+			<li>
+				<img class="close" src="img/close.gif"/>
+				<h3>标题一</h3>
+				<input type="text" name="" id="" value="" />
+			</li>
+			<li>
+				<img class="close" src="img/close.gif"/>
+				<h3>标题二</h3>
+				<input type="text" name="" id="" value="" />
+			</li>
+			<li>
+				<img class="close" src="img/close.gif"/>
+				<h3>标题三</h3>
+				<input type="text" name="" id="" value="" />
+			</li>
+			<li>
+				<img class="close" src="img/close.gif"/>
+				<h3>标题四</h3>
+				<input type="text" name="" id="" value="" />
+			</li>
+			<li>
+				<img class="close" src="img/close.gif"/>
+				<h3>标题五</h3>
+				<input type="text" name="" id="" value="" />
+			</li>
+			<li>
+				<img class="close" src="img/close.gif"/>
+				<h3>标题六</h3>
+				<input type="text" name="" id="" value="" />
+			</li>
+		</ul>
+	</div>
+	<button onclick="sub()">提交</button>
+	<script src="js/1.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

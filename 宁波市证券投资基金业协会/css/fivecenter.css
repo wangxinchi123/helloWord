@@ -1,0 +1,314 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+.dian{
+	font-weight:bold;
+}
+.content {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 10px;
+	font-family: "微软雅黑";
+	min-width: 900px;
+	overflow: hidden;
+}
+
+.content .content-left {
+	float: left;
+	width: 20%;
+}
+
+.content .content-left h3 {
+	width: 90%;
+	padding-left: 10%;
+	line-height: 34px;
+	color: #dc3c02;
+	font-size: 16px;
+	font-weight: 500;
+	border-bottom: 1px solid lightgray;
+	background-color: #E74C3C;
+	color: white;
+}
+
+.content .content-left .fivecenters {
+	border: 1px solid lightgray;
+	/*overflow: hidden;*/
+}
+
+.content .content-left .fivecenters div{
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 14px;
+	line-height: 30px;
+	border-bottom: 1px solid lightgray;
+	cursor: pointer;
+	color: #666;
+}
+.content .content-left .fivecenters h4{
+	font-weight: 500;
+	background: url(../img/骚气箭头.png) no-repeat;
+	background-position: -260px center;
+	background-size: 100% 100%;
+	transition: all 0.3s linear;
+}
+.content .content-left .fivecenters .first a{
+	transition: all 0.3s linear;
+}
+.content .content-left .fivecenters .first:hover a{
+	color: white;
+}
+.content .content-left .fivecenters div:hover h4{
+	background-position: 0 center;
+	color: white;
+}
+.content .content-left .fivecenters div.last {
+	border: none;
+}
+.content .content-left .fivecenters ul{
+	height: 0;
+	color: #e74c3c;
+	overflow: hidden;
+	transition: all 0.3s linear;
+}
+.content .content-left .fivecenters div:hover .info-pilu{
+	height: 60px;
+}
+.content .content-left .fivecenters div:hover ul{
+	height: 90px;
+}
+.content .content-left .fivecenters ul li{
+	width: 70%;
+	margin: 0 auto;
+	/*margin-left: 15%;*/
+}
+.content .content-left .fivecenters ul li a{
+	width: 100%;
+	border-bottom: 1px solid #e74c3c;
+	color: #E74C3C;
+	/*background: url(../img/骚气箭头.png) no-repeat;
+	background-position: -200px center;
+	background-size: 100% 100%;*/
+	/*transition: all 0.3s linear;*/
+}
+.content .content-left .fivecenters ul li:hover{
+
+}
+
+.content .content-left .member-distributed {
+	width: 100%;
+	height: 200px;
+	margin-top: 8px;
+	border: 1px solid lightgray;
+	/*overflow: hidden;*/
+}
+
+.content .content-left .member-distributed img {
+	width: 100%;
+	height: 100%;
+}
+
+.content .content-left .links {
+	width: 100%;
+	margin-top: 8px;
+	border: 1px solid lightgray;
+	/*overflow: hidden;*/
+}
+
+.content .content-left .links .yqlj {
+	position: relative;
+	width: 100%;
+	height: 107px;
+	overflow: hidden;
+}
+
+.content .content-left .links .yqlj ul {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+.content .content-left .links li {
+	width: 80%;
+	margin: 0 auto;
+	padding-left: 10px;
+	border-bottom: 1px dotted lightgray;
+	cursor: pointer;
+}
+.content .content-left .links li:hover a{
+	color: #E74C3C;
+}
+.content .content-left .links li a {
+	display: block;
+	font-size: 12px;
+	color: #666;
+	line-height: 26px;
+	text-decoration: none;
+}
+/***********************列表页*****************************/
+.content .content-right {
+	position: relative;
+	float: left;
+	width: 78%;
+	margin-left: 1%;
+	padding-bottom: 30px;
+	min-height: 610px;
+	border: 1px solid lightgray;
+}
+.content .content-right h3{
+	background-color: #E74C3C;
+	color: white;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 34px;
+	padding: 0 20px;
+}
+.content .content-right h3 a{
+	color: white;
+}
+.content .content-right .info-list{
+	padding: 30px 30px;
+}
+.content .content-right .info-list li{
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 28px;
+	color: black;
+	border-bottom: 1px dotted lightgray;
+}
+.content .content-right .info-list li a{
+	float: left;
+	cursor: pointer;
+}
+.content .content-right .info-list li a:hover{
+	color: #E74C3C;
+}
+.content .content-right .info-list li p{
+	float: right;
+	color: lightgray;
+}
+.content .content-right .paging{
+	position: absolute;
+	bottom: 15px;
+	right: 30px;
+}
+.content .content-right .paging ul li{
+	float: left;
+	border:1px solid lightgray;
+	border-radius: 5px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+.content .content-right .paging ul li:hover{
+	background-color: #E74C3C;
+	color: white;
+}
+.content .content-right .paging ul li a{
+	line-height: 24px;
+	padding: 5px 10px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+/********************文章页********************/
+.content .content-right .wenzhang{
+	padding: 10px 30px;
+}
+.content .content-right .wenzhang .biaoti{
+	line-height: 40px;
+	font-weight: 500;
+	font-size: 24px;
+	text-align: center;
+}
+.content .content-right .wenzhang .pageviews{
+	font-size: 12px;
+	line-height: 30px;
+	color: #666666;
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+}
+.content .content-right .wenzhang .writings{
+	padding: 20px 0;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	/*text-indent:2em;*/
+	/*border-bottom: 1px solid lightgray;*/
+}
+.content .content-right .wenzhang .previous-next{
+	float: right;
+	margin-right: 30px;
+	color:#666666;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 26px;
+}
+
+/*****************会员列表页*********************/
+.content-left .fivecenters a{
+	text-decoration: none;
+	color: #666;
+}
+.content-right .member-list a{
+	text-decoration: none;
+	color: #666;
+}
+.content-right .member-list h4{
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+	line-height: 30px;
+}
+.content-right .member-list table{
+	width: 90%;
+	margin: 0 auto;
+	font-family: "微软雅黑";
+	text-align: center;
+	line-height: 30px;
+	border-collapse:collapse;
+}
+.content-right .member-list table td,
+.content-right .member-list table th{
+	font-size: 12px;
+	padding: 5px 5px;
+	line-height: 20px;
+}
+/******************会员信息******************/
+.content-right .mb-info{
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+.content-right .mb-info div{
+	line-height: 30px;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	font-weight: 500;
+	overflow: hidden;
+}
+.content-right .mb-info div img{
+	width: 50%;
+}
+.content-right .mb-info .p1{
+	float:right;
+	width: 60%;
+}
+.content-right .mb-info .p2 p{
+	font-size: 14px;
+}
+#allmap{
+	width:80%;
+	height:200px;
+	margin: 0 auto;
+}
