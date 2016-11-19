@@ -1,34 +1,52 @@
-body,html{
-	height: 100%;
-}
+
 
 body{
 	background-color: #f6f6f6;
-	position: relative;
-	
 }
 .overall{
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: calc(100% - 60px);
-	/*padding-bottom: 60px;*/
-	/*overflow: auto;*/
-	
+	position: relative;
+	padding-bottom: 60px;
 }
-
+/*.head{
+	background-color: #333;	
+	overflow: hidden;
+}
+.head div{
+	float: left;
+	height: 60px;
+	line-height: 60px;
+	color: white;
+}
+.head .back-btn{
+	width: 20%;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	text-align: center;
+}
+.head .back-btn .iconfont{
+	font-size: 18px;
+}
+.head .p-name{
+	width: 60%;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	text-align: center;
+}
+.head .p-info{
+	width: 20%;
+}
+.head .p-info .iconfont{
+	float: right;
+	margin-right: 30%;
+	font-size: 18px;
+}*/
 .content{
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: calc(100% - 60px);
 	background-color: #f6f6f6;
 	padding-top: 30px;
 	padding-bottom: 20px;
 	min-height: 600px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
+	overflow: hidden;
 }
 
 .content .info-left{
@@ -172,15 +190,14 @@ body{
 }
 
 #expression{
-	position: absolute;
-	top: calc(100% - 60px);
+	position: fixed;
+	bottom: -200px;
 	left: 0;
-	height: 60px;
+	height: 260px;
 	width: 100%;
 	background-color: #F6F6F6;
 	padding-top: 1%;
 	z-index: 5;
-	overflow: hidden;
 }
 #expression li{
 	float: left;
@@ -218,4 +235,9 @@ body{
 	color: white;
 	display: none;
 }
-
+#blankBox{
+	display: none;
+	width: 100%;
+	height: 0;
+	background-color: #F6F6F6;
+}

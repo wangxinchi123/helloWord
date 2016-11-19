@@ -2,13 +2,16 @@
 //var openid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
 //var username = window.location.href.split("?")[1].split("&")[0].split("=")[1];
 
-
+var firstId=1;
+var lastId=1;
 var nowExpressionIndex;//当前页数
 var openid = "o8J2PwiYrse4M8QucNE4ZAliPZzo";
+//var openid = "o8J2PwgqBdE0IQ6ZwtcyfnqYNcfw";
 var username = "gh_3e8703d7490f";
 var startX,endX,startY,endY;//坐标
 var dropDownFlag=1;//判断是否下拉获取历史记录
-var minKey,maxKey;
+var db;
+var url;//媒体地址
 
 $(function(){
 	FastClick.attach(document.body);
@@ -17,12 +20,18 @@ $(function(){
 	getCacheByPulldown();
 })
  function init() {
-    var dbParams = new Object();
-    dbParams.db_name = "guohe";
-    dbParams.db_version = "2";
-    dbParams.db_store_name = "weixin";
-    dbObject.init(dbParams);
-    getinfo();
+    if(window.openDatabase==undefined){
+		alert("浏览器不支持Web Database!");
+		return;
+	}
+    else{
+    	db=openDatabase("weixin","1.0","weixinshuju",1024*1024);
+    	db.transaction(function (tx) {
+//  		tx.executeSql("DROP TABLE o8J2PwiYrse4M8QucNE4ZAliPZzo");
+        	tx.executeSql("create table if not exists "+openid+" (id unique, p1, p2, p3, mark)");  
+        	getinfo(tx);
+   		});
+    }
 }
 
 function initAndBind(){
@@ -73,6 +82,9 @@ function initAndBind(){
 }
 
 function addQQexpression(){
+	$("#expression")[0].addEventListener("touchstart",touchStart,true);
+	$("#expression")[0].addEventListener("touchend",touchEnd,true);
+	$("#expression")[0].addEventListener("touchmove",touchMove,true);
 	var p = 1;
 	nowExpressionIndex = 1;
 	var expressionBox = "expressionBox"+p;
@@ -91,34 +103,33 @@ function addQQexpression(){
 			else{
 				$("#expression").append("<div class="+expressionBox+" style='position:absolute;width:100%;overflow:hidden;top:0;left:100%'></div>");
 			}
-			$("#expression")[0].addEventListener("touchstart",touchStart,false);
-			$("#expression")[0].addEventListener("touchend",touchEnd,false);
 		}
 		str = str + "<li onclick='addPicInText("+i+")'><img src='QQexpression/"+i+".gif' /></li>";
 	}
 	$("."+expressionBox).append(str);
 }
-function touchStart(event) {
-//	event.preventDefault();
-	if(event.touches.length == 1) {
-		var touch = event.touches[0];
-		startX = touch.clientX;
-		startY = touch.clientY;
+function touchMove(e){
+	e.preventDefault();
+}
+function touchStart(e) {
+	if(e.touches.length == 1) {
+		startX = e.changedTouches[0].pageX;
+		startY = e.changedTouches[0].pageY;
 	}
 }
 function touchEnd(e){
 	endX = e.changedTouches[0].pageX;
 	endY = e.changedTouches[0].pageY;
 //	e.preventDefault();
-	if(Math.abs(startX - endX) > Math.abs(startY-endY)*0.08){
-		if(startX - endX > 0){
+	if(Math.abs(startX - endX) > Math.abs(startY-endY)){
+		if(startX - endX > 40){
 			if(nowExpressionIndex+1<4){
 				$(".expressionBox"+nowExpressionIndex).stop(true,true).animate({"left":"-100%"},500);
 				nowExpressionIndex++;
 				$(".expressionBox"+nowExpressionIndex).stop(true,true).animate({"left":"0"},500);
 			}
 		}
-		else if(startX - endX < 0){
+		else if(startX - endX < -40){
 			if(nowExpressionIndex-1 > 0){
 				$(".expressionBox"+nowExpressionIndex).stop(true,true).animate({"left":"100%"},500);
 				nowExpressionIndex--;
@@ -128,6 +139,7 @@ function touchEnd(e){
 		$(".nav-list li").css("background-color","lightgray");
 		$(".nav-list li").eq(nowExpressionIndex-1).css("background-color","gray");
 	}
+
 }
 function addPicInText(i){
 	$(".enter-word textarea").val($(".enter-word textarea").val()+imgArray[i]);
@@ -179,52 +191,54 @@ function Tclear() {
     dbObject.clear();
 }
 
-function getinfo(){
-	var request = indexedDB.open(dbObject.db_name,dbObject.db_version);
-	request.onsuccess = function(event)
-    {
-        //此处采用异步通知. 在使用curd的时候请通过事件触发
-        dbObject.db = event.target.result;
-        var k = 0;
-		var transaction = dbObject.db.transaction(dbObject.db_store_name, "readwrite");
-		var store = transaction.objectStore(dbObject.db_store_name);
-		var request = store.openCursor(null,"prev");
-		var str = "";
-		request.onsuccess = function(e){
-	        var cursor = e.target.result;
-	        if(cursor){
-	        	if(k==0){
-	        		lastId = cursor.key;
-	        	}
-	        	k++;
-	        	if(cursor.value.mark == "right"){
-	        		var arr = new Array(2);
-	        		arr[0] = "<div class='info-right'>"+cursor.value.p1+cursor.value.p2+cursor.value.p3+"</div>";
-	        		arr[1] = str;
-	        		str = arr.join("");
-	        	}
-	        	else{
-	        		var arr = new Array(2);
-	        		arr[0] = "<div class='info-left'>"+cursor.value.p1+cursor.value.p2+cursor.value.p3+"</div>";
-	        		arr[1] = str;
-	        		str = arr.join("");
-	        	}
-				if(k>=20){
-					firstId = cursor.key;
-					getInfoInCache(str);
-				}
-				else{
-					cursor.continue();
-				}  
-	        }else {
-	            if(k==0){
-	            	getInfoFromServer(str);
-	            }
-	            else{
-	            	getInfoInCache(str);
+function getinfo(tx){
+	    var maxid = tx.executeSql("select max(id) from "+openid);
+	    var minid = tx.executeSql("select min(id) from "+openid);
+		tx.executeSql('SELECT * FROM '+openid+' order by id', [], function (tx, results) {
+            var len = results.rows.length,i;
+            if(len == 0){
+            	getInfoFromServer("");
+            }
+            else{
+	            firstId = results.rows.item(len-1).id;
+	            var k = 0;
+	            var str = "";
+	            for (i = len-1; i >=0; i--){
+	            	if(firstId>minid){
+	            		if(k==0){
+		        			lastId = results.rows.item(i).id;
+			        	}
+			        	k++;
+			        	if(results.rows.item(i).mark == "right"){
+			        		var arr = new Array(2);
+			        		arr[0] = "<div class='info-right'>"+results.rows.item(i).p1+results.rows.item(i).p2+cresults.rows.item(i).p3+"</div>";
+			        		arr[1] = str;
+			        		str = arr.join("");
+			        	}
+			        	else{
+			        		var arr = new Array(2);
+			        		arr[0] = "<div class='info-left'>"+results.rows.item(i).p1+results.rows.item(i).p2+results.rows.item(i).p3+"</div>";
+			        		arr[1] = str;
+			        		str = arr.join("");
+			        	}
+						if(k>=10){
+							firstId = results.rows.item(i).id;
+							getInfoInCache(str);
+							break;
+						}
+	            	}
+	            	else{
+	            		if(k==0){
+		            		getInfoFromServer(str);
+			            }
+			            else{
+			            	getInfoInCache(str);
+			            }
+			            break;
+	            	}
 	            }
 	        }
-    	}
+     });
         setInterval(function(){
         	$.ajax({
 			    type:"get",
@@ -239,7 +253,7 @@ function getinfo(){
 				           break;
 				        }
 				        lastId = data.nowChatLastID;
-				       str1 = str1 + concreteOfGetInfo(data.messageList[i],str1);
+				       str1 = concreteOfGetInfo(data.messageList[i],str1);
 				    }
 				    if(str1 != ""){
 				    	$(".content").append(str1);
@@ -248,8 +262,7 @@ function getinfo(){
 				   
 				}
 			});
-        },2000000);
-    };
+        },2000);
 }
 function getInfoInCache(str){
 	$.ajax({
@@ -297,16 +310,23 @@ function concreteOfGetInfo(data,str) {
 	if(data.message_flag == "1") {
 		//解析XML
 		var obj = analysisXML(data);
-		str = str + "<div class='info-left'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='zuosanjiao'></div><p class='message'>" + obj.content + "</p></div>";
 		var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
 		var p2 = "<div class='zuosanjiao'></div>";
-		var p3 = "<p class='message'>" + obj.content + "</p>";
-		dbObject.put({
-			p1: p1,
-			p2: p2,
-			p3: p3,
-			mark: "left"
-		}, parseInt(data.id));
+		if(obj.msgtype == "text"){
+			str = str + "<div class='info-left'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='zuosanjiao'></div><p class='message'>" + obj.content + "</p></div>";
+			var p3 = "<p class='message'>" + obj.content + "</p>";
+			db.transaction(function (tx){
+				tx.executeSql('INSERT INTO '+openid+' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
+			});	
+		}
+		else if(obj.msgtype == "image"){
+			getMedia(obj.mediaid,obj.msgtype);
+			str = str + "<div class='info-left'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='zuosanjiao'></div><p class='message'><img style='width:100%;' src=" + url + " /></p></div>";
+			var p3 = "<p class='message'><img style='width:100%;' src=" + url + " /></p>";
+			db.transaction(function (tx){
+				tx.executeSql('INSERT INTO '+openid+' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
+			});
+		}
 	} else if(data.message_flag == "2") {
 //		return false;
 		if(data.message_type == "text") {
@@ -323,12 +343,9 @@ function concreteOfGetInfo(data,str) {
 			var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
 			var p2 = "<div class='yousanjiao'></div>";
 			var p3 = "<p class='message'>" + content + "</p>";
-			dbObject.put({
-				p1: p1,
-				p2: p2,
-				p3: p3,
-				mark: "right"
-			}, parseInt(data.id));
+			db.transaction(function (tx){
+				tx.executeSql('INSERT INTO '+openid+' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"right")',[parseInt(data.id),p1,p2,p3]);
+			});
 		}
 	}
 	return str;
@@ -336,87 +353,91 @@ function concreteOfGetInfo(data,str) {
 
 function getCacheByPulldown(){
 	
-	$(".content")[0].addEventListener("touchstart",function(event){
-		var touch = event.touches[0];
-		startX = touch.clientX;
-		startY = touch.clientY;
+	$(".content")[0].addEventListener("touchstart",function(e){
+		startX = e.changedTouches[0].pageX;
+		startY = e.changedTouches[0].pageY;
 	},false);
 	$(".content")[0].addEventListener("touchend",function(e){
 		endX = e.changedTouches[0].pageX;
 		endY = e.changedTouches[0].pageY;
 		if($("body").scrollTop()==0 && dropDownFlag==1){
-			if(Math.abs(startY - endY) > Math.abs(startX-endX)*0.2){
+			if(Math.abs(startY - endY) > Math.abs(startX-endX)){
 				if(startY - endY < -80){
-					dropDownFlag = 0;
-					var request = indexedDB.open(dbObject.db_name,dbObject.db_version);
-					request.onsuccess = function(event)
-    				{
-    					dbObject.db = event.target.result;
-					    var k = 0;
-					    console.log("+++++++++++++++++++++++++++"+firstId);
-						var transaction = dbObject.db.transaction(dbObject.db_store_name, "readwrite");
-						var store = transaction.objectStore(dbObject.db_store_name);
-						var request = store.openCursor(IDBKeyRange.bound(0,firstId,false,true),"prev");
-						var str = "";
-						request.onsuccess = function(e){
-					        var cursor = e.target.result;
-					       
-					        if(cursor){
-					        	console.log("a1");
-					        	firstId = cursor.key;
-					        	k++;
-					        	if(cursor.value.mark == "right"){
-					        		var arr = new Array(2);
-					        		arr[0] = "<div class='info-right'>"+cursor.value.p1+cursor.value.p2+cursor.value.p3+"</div>";
-					        		arr[1] = str;
-					        		str = arr.join("");
-					        	}
-					        	else{
-					        		var arr = new Array(2);
-					        		arr[0] = "<div class='info-left'>"+cursor.value.p1+cursor.value.p2+cursor.value.p3+"</div>";
-					        		arr[1] = str;
-					        		str = arr.join("");
-					        	}
-								if(k>=10){
-									console.log("a2="+k);
-									$(".content").prepend(str);
-									dropDownFlag = 1;
-								}
-								else{
-									console.log("a3="+k);
-									cursor.continue();
-								}
-					        }
-					        else{
-					        	console.log("b1="+k);
-					        	if(k!=0){
-					        		$(".content").prepend(str);
-					        	}
-					        	$.ajax({
-									type:"get",
-									url:apiUrl+"getTextRecord",
-									async:true,
-									data:{username:username,openid:openid,firstID:firstId,num:10-k},
-									dataType:"json",
-									success:function(data){
-										console.log("b2="+data.length+"+"+data[0].id+"+"+data[data.length-1].id);
-										var mystr = "";
-										for(var i=0;i<data.length;i++){
-									        if(data[i] == null){
-									           break;
-									        }
-									        firstId = data[0].id;
-									        mystr =concreteOfGetInfo(data[i],mystr);
-									    }
-									    $(".content").prepend(mystr);
-									    dropDownFlag = 1;
+    				db.transaction(function (tx) {
+						dropDownFlag = 0;
+						var maxid = tx.executeSql("select max(id) from "+openid);
+	    				var minid = tx.executeSql("select min(id) from "+openid);
+						tx.executeSql('select * from '+openid+' order by id', [], function (tx, results) {
+				            var len = results.rows.length,i;
+				            var k = 0;
+				            var str = "";
+				            for (i = len-1; i >=0; i--){
+				            	if(firstId>minid){
+				            		if(k==0){
+					        			lastId = results.rows.item(i).id;
+						        	}
+						        	k++;
+						        	if(results.rows.item(i).mark == "right"){
+						        		var arr = new Array(2);
+						        		arr[0] = "<div class='info-right'>"+results.rows.item(i).p1+results.rows.item(i).p2+cresults.rows.item(i).p3+"</div>";
+						        		arr[1] = str;
+						        		str = arr.join("");
+						        	}
+						        	else{
+						        		var arr = new Array(2);
+						        		arr[0] = "<div class='info-left'>"+results.rows.item(i).p1+results.rows.item(i).p2+results.rows.item(i).p3+"</div>";
+						        		arr[1] = str;
+						        		str = arr.join("");
+						        	}
+									if(k>=10){
+										firstId = results.rows.item(i).id;
+										dropDownFlag = 1;
+										break;
 									}
-								});
-					        }
-	    				}
-					}
+				            	}
+				            	else{
+				            		if(k!=0){
+					            		$(".content").prepend(str);
+						            }
+						            $.ajax({
+										type:"get",
+										url:apiUrl+"getTextRecord",
+										async:true,
+										data:{username:username,openid:openid,firstID:firstId,num:10-k},
+										dataType:"json",
+										success:function(data){
+											var mystr = "";
+											for(var i=0;i<data.length;i++){
+										        if(data[i] == null){
+										           break;
+										        }
+										        firstId = data[0].id;
+										        mystr =concreteOfGetInfo(data[i],mystr);
+										    }
+										    $(".content").prepend(mystr);
+										    dropDownFlag = 1;
+										}
+									});
+						            break;
+				            	}
+				            }
+				     });
+				    });
 				}
 			}
 		}	
 	},false);
+}
+
+function getMedia(id,type){
+	$.ajax({
+		type:"get",
+		url:apiUrl+"getMedia",
+		async:false,
+		data:{username:username,type:type,mediaID:id},
+		dataType:"json",
+		success:function(data){
+			url = data.url;
+		}
+	});
 }
