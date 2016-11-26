@@ -162,24 +162,18 @@ imgArray2[100] = "/:&>";
 
 function analysisXML(data){
 	var obj = {};
-	if(data.message_type == "text"){
-		var a = $.parseXML(data.message_value);
-		obj.tousername = $(a).find("ToUserName").text();
-		obj.fromusername = $(a).find("FromUserName").text();
-		obj.createtime = $(a).find("CreateTime").text();
-		obj.msgtype = $(a).find("MsgType").text();
+	var a = $.parseXML(data.message_value);
+	obj.msgtype = $(a).find("MsgType").text();
+	obj.tousername = $(a).find("ToUserName").text();
+	obj.fromusername = $(a).find("FromUserName").text();
+	obj.createtime = $(a).find("CreateTime").text();
+	obj.msgid = $(a).find("MsgId").text();
+	if(obj.msgtype == "text"){
 		obj.content = $(a).find("Content").text();
-		obj.msgid = $(a).find("MsgId").text();
 	}
-	else if(data.message_type == "image"){
-		var a = $.parseXML(data.message_value);
-		obj.tousername = $(a).find("ToUserName").text();
-		obj.fromusername = $(a).find("FromUserName").text();
-		obj.createtime = $(a).find("CreateTime").text();
-		obj.msgtype = $(a).find("MsgType").text();
+	else if(obj.msgtype == "image"){
 		obj.picurl = $(a).find("PicUrl").text();
 		obj.mediaid = $(a).find("MediaId").text();
-		obj.msgid = $(a).find("MsgId").text();
 	}
 	return obj;
 }

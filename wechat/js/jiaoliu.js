@@ -4,6 +4,7 @@
 
 var firstId=1;
 var lastId=1;
+var time1;
 var nowExpressionIndex;//当前页数
 var openid = "o8J2PwiYrse4M8QucNE4ZAliPZzo";
 //var openid = "o8J2PwgqBdE0IQ6ZwtcyfnqYNcfw";
@@ -11,71 +12,106 @@ var username = "gh_3e8703d7490f";
 var startX,endX,startY,endY;//坐标
 var db;
 var url;//媒体地址
+var theFirstTime = 1;//第一次进入页面  
+var morentouxiang = "img/fenxiaozhu.png";//默认头像
+var headimgUrl = "img/fenxiaozhu.png";//头像地址
+var listInfo;
 
 $(function(){
+	weixinjs();
 	FastClick.attach(document.body);
 	init();
 	initAndBind();
-//	setInterval(getCacheByPulldown,100);
 	getCacheByPulldown();
 })
+function getNowContactInfo(){
+	$.ajax({
+		type:"get",
+		url:apiUrl+"getOneFensiInfo",
+		async:false,
+		data:{username:username,openid:openid},
+		dataType:"json",
+		success:function(data){
+			document.title=data[0].nickname;
+			if(data[0].headimgurl){
+				headimgUrl = data[0].headimgurl;
+			}
+		}
+	});
+}
  function init() {
     if(window.openDatabase==undefined){
 		alert("浏览器不支持Web Database!");
 		return;
 	}
     else{
-    	db=openDatabase("weixin","1.0","weixinshuju",1024*1024);
+    	getNowContactInfo();
+    	db=openDatabase("weixin","1.0","weixinshuju",6*1024*1024);
     	db.transaction(function (tx) {
-//  		tx.executeSql("DROP TABLE o8J2PwiYrse4M8QucNE4ZAliPZzo");
-        	tx.executeSql("create table if not exists "+openid+" (id unique, p1, p2, p3, mark)");  
+//  		tx.executeSql("DROP TABLE o8J2PwiYrse4M8QucNE4ZAliPZzo1");
+        	tx.executeSql("create table if not exists \""+openid+"\" (id unique, p1, p2, p3, mark)");  
         	getinfo(tx);
    		});
     }
 }
 
-function initAndBind(){
-	
+function initAndBind(){	
 	addQQexpression();
 	var picOrKey = 0;//图片和软键盘切换的标识
 	$(".nav-list").css("margin-left",(window.innerWidth-13*3)/2+"px");
 	$(".nav-list li").eq(0).css("background-color","gray");
-	$(".content").css("min-height",window.innerHeight-60+"px");
+	$(".upload-pic").css("height",$(".others").width()*0.25+"px");
+//	$(".content").css("min-height",window.innerHeight-60+"px");
 	$(".pic").click(function(){
+		$(".press-speak").fadeOut(300);
 		if(picOrKey == 1){
 			$(".enter-word textarea").focus();
 		}
 		else{
-			$(".sendMsg").css("display","block");
-			var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
-			$("#expression").animate({"height":"+=200px"},300,function(){
-				clearInterval(timer);
+			if($(".others").css("display") == "block"){
+				$(".sendMsg").css("display","block");
+				$(".others").animate({"top":"260px"},300,function(){
+					$(this).css({"display":"none","top":"60px"});
+//					$(".content").scrollTop($(".content").height()*1.5);
+				});
 				picOrKey=1;
-			});
+			}
+			else{
+//				$(".others").css("display","none");
+				var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
+				setTimeout(function(){
+					$(".sendMsg").css("display","block");
+					$("#expression").animate({"height":"260px"},300,function(){
+						clearInterval(timer);
+//						$(".content").scrollTop($(".content").height()*1.5);
+						picOrKey=1;
+					});
+				},200);	
+			}
 		}
 
 	});
 	$("#expression .sendMsg").click(function(){
 		sendMessage();
 	});
-	$("content").on("touchstart",function(event){
-//		event.preventDefault();
-	})
+	
 	$(".content").on("touchstart",function(event){
+		$(".press-speak").fadeOut(300);
 		$(".enter-word textarea").blur();
-		if(picOrKey == 1){
-			$("#expression").animate({"height":"-=200px"},300,function(){
-			});
-		}
+		$("#expression").animate({"height":"60px"},300,function(){
+			$(".others").css("display","none");
+		});
 		$(".sendMsg").css("display","none");
+		$("#fansList").animate({"left":"100%"},300,function(){
+			$("#fansList").css("display","none");
+		});
 		picOrKey=0;
 	});
 	$(".enter-word textarea").on("focus",function(){
-		window.scrollTo(0,document.body.scrollHeight);
 		$(".sendMsg").css("display","block");
-		if(picOrKey == 1){
-			$("#expression").css({"height":"-=200px"});
-		}
+		$("#expression").css({"height":"60px"});
+//		$(".content").scrollTop($(".content").height()*1.5);
+		$(".others").css("display","none");
 		picOrKey=0;
 	});
 	$(".enter-word textarea").keypress(function(e){
@@ -84,7 +120,36 @@ function initAndBind(){
 	    	e.preventDefault();
 	    	sendMessage();
 	    }
-	})
+	});
+	$("#xuanfu").click(function(){
+		$("#fansList").css("display","block");
+		$("#fansList").animate({"left":"50%"},300);
+	});
+	
+	$(".yuyin").click(function(){
+		if($(".press-speak").css("display") == "none"){
+			$(".press-speak").fadeIn(300);
+		}
+		else{
+			$(".press-speak").fadeOut(300);
+		}
+		if($("#expression").height()>60){
+			$("#expression").animate({"height":"60px"},300);
+			picOrKey=0;
+		}
+	});
+	$(".upload").click(function(){
+		var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
+		$(".press-speak").fadeOut(300);
+		setTimeout(function(){
+			$(".others").css("display","block");
+				$("#expression").animate({"height":"260px"},300,function(){
+//					$(".content").scrollTop($(".content").height()*1.5);
+					clearInterval(timer);
+				});
+			},200);
+			
+	});
 //	InputBoxChange();
 }
 
@@ -203,11 +268,12 @@ function Tclear() {
 }
 
 function getinfo(tx){
-	    var maxid = tx.executeSql("select max(id) from "+openid);
-	    var minid = tx.executeSql("select min(id) from "+openid);
-		tx.executeSql('SELECT * FROM '+openid+' order by id', [], function (tx, results) {
+	    var maxid = tx.executeSql("select max(id) from \'" + openid+"\'");
+	    var minid = tx.executeSql("select min(id) from \'" + openid+"\'");
+		tx.executeSql('SELECT * FROM \''+openid+'\' order by id',[], function(tx, results) {
             var len = results.rows.length,i;
             if(len == 0){
+            	
             	getInfoFromServer("");
             }
             else{
@@ -228,7 +294,7 @@ function getinfo(tx){
 			        	}
 			        	else{
 			        		var arr = new Array(2);
-			        		arr[0] = "<div class='info-left'>"+results.rows.item(i).p1+results.rows.item(i).p2+results.rows.item(i).p3+"</div>";
+			        		arr[0] = "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div>"+results.rows.item(i).p2+results.rows.item(i).p3+"</div>";
 			        		arr[1] = str;
 			        		str = arr.join("");
 			        	}
@@ -250,7 +316,7 @@ function getinfo(tx){
 	            }
 	        }
      });
-        setInterval(function(){
+       time1 = setInterval(function(){
         	$.ajax({
 			    type:"get",
 			    url:apiUrl+"getMessageList",
@@ -258,7 +324,9 @@ function getinfo(tx){
 			    data:{username:username,openid:openid,ones_lastID:lastId},
 			    dataType:"json",
 			    success:function(data){
+			    	console.log(data);
 			    	var str1 = "";
+			    	var str2 = "";
 				    for(var i=0;;i++){
 				        if(data.messageList[i] == null){
 				           break;
@@ -268,12 +336,75 @@ function getinfo(tx){
 				    }
 				    if(str1 != ""){
 				    	$(".content").append(str1);
-				    	window.scrollTo(0,document.body.scrollHeight);
+//				    	$(".content").scrollTop();
 				    }
-				   
+				    var myheadimgurl;
+				    if(theFirstTime == 1){
+					   	for(var i=0;i<data.fensiList.length;i++){
+					   		var obj = analysisXML(data.fensiList[i]);
+					   		if(data.fensiList[i].headimgurl){
+					   			myheadimgurl = data.fensiList[i].headimgurl;
+					   		}
+					   		else{
+					   			myheadimgurl = morentouxiang;
+					   		}
+					   		if(obj.msgtype == "text"){
+					   			if(data.fensiList[i].messagenum_noread>0){
+					   				str2 = str2 + "<div id="+obj.fromusername+" onclick='jumpContact(\""+obj.fromusername+"\")'><img src="+myheadimgurl+" /><span>"+data.fensiList[i].nickname+"</span><p>"+obj.content+"</p><div class='msg-number'>"+data.fensiList[i].messagenum_noread+"</div></div>";
+					   			}
+					   			else{
+					   				str2 = str2 + "<div id="+obj.fromusername+" onclick='jumpContact(\""+obj.fromusername+"\")'><img src="+myheadimgurl+" /><span>"+data.fensiList[i].nickname+"</span><p>"+obj.content+"</p></div>";
+					   			}
+					   		}
+					   		else if(obj.msgtype == "image"){
+					   			if(data.fensiList[i].messagenum_noread>0){
+					   				str2 = str2 + "<div id="+obj.fromusername+" onclick='jumpContact(\""+obj.fromusername+"\")'><img src="+myheadimgurl+" /><sapn>"+data.fensiList[i].nickname+"</span><p>[图片]</p><div class='msg-number'>"+data.fensiList[i].messagenum_noread+"</div></div>";
+					   			}
+					   			else{
+					   				str2 = str2 + "<div id="+obj.fromusername+" onclick='jumpContact(\""+obj.fromusername+"\")'><img src="+myheadimgurl+" /><sapn>"+data.fensiList[i].nickname+"</span><p>[图片]</p></div>";
+					   			}
+					   		}
+					   	}
+					   	$("#fansList").html(str2);
+					   	theFirstTime = 0;
+					}
+				    else{
+				    	for(var i=data.fensiList.length-1;i>=0;i--){
+				    		if(data.fensiList[i].messagenum_noread>0 && listInfo.fensiList[i].messagenum_noread != data.fensiList[i].messagenum_noread){
+				    			if(data.fensiList[i].headimgurl){
+					   				myheadimgurl = data.fensiList[i].headimgurl;
+						   		}
+						   		else{
+						   			myheadimgurl = morentouxiang;
+						   		}
+				    			var obj = analysisXML(data.fensiList[i]);
+				    			$("#"+obj.fromusername).remove();
+				    			if(obj.msgtype == "text"){
+				    				$("#fansList").prepend("<div id="+obj.fromusername+" onclick='jumpContact(\""+obj.fromusername+"\")'><img src="+myheadimgurl+" /><span>"+data.fensiList[i].nickname+"</span><p>"+obj.content+"</p><div class='msg-number'>"+data.fensiList[i].messagenum_noread+"</div></div>");
+				    			}
+				    			else if(obj.msgtype == "image"){
+					   				$("#fansList").prepend("<div id="+obj.fromusername+" onclick='jumpContact(\""+obj.fromusername+"\")'><img src="+myheadimgurl+" /><span>"+data.fensiList[i].nickname+"</span><p>[图片]</p><div class='msg-number'>"+data.fensiList[i].messagenum_noread+"</div></div>");
+					   			}
+				    		}
+				    	}
+				    }
+				    listInfo=data;
 				}
 			});
         },2000);
+}
+function jumpContact(myid){
+	clearInterval(time1);
+	openid = myid;
+	theFirstTime = 1;
+	$(".content").empty();
+	headimgUrl = "img/fenxiaozhu.png";
+	getNowContactInfo();
+	db.transaction(function (tx) {
+//  	tx.executeSql("DROP TABLE o8J2PwiYrse4M8QucNE4ZAliPZzo");
+        tx.executeSql("create table if not exists \""+openid+"\" (id unique, p1, p2, p3, mark)");
+        getinfo(tx);
+   	});
 }
 function getInfoInCache(str){
 	$.ajax({
@@ -291,7 +422,7 @@ function getInfoInCache(str){
 		       str = concreteOfGetInfo(data.messageList[i],str);
 		    }
 		    $(".content").append(str);
-		    window.scrollTo(0,document.body.scrollHeight);
+		    $(".content").scrollTop(window.innerHeight);
 		}
 	});
 }
@@ -312,7 +443,7 @@ function getInfoFromServer(str){
 		        str =concreteOfGetInfo(data.messageList[i],str);
 		    }
 		    $(".content").append(str);
-		    window.scrollTo(0,document.body.scrollHeight);
+		    $(".content").scrollTop(window.innerHeight);
 		}
 	});
 }
@@ -321,21 +452,29 @@ function concreteOfGetInfo(data,str) {
 	if(data.message_flag == "1") {
 		//解析XML
 		var obj = analysisXML(data);
-		var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
+		var p1 = "<div class='touxiang'><img src="+headimgUrl+"/></div>";
 		var p2 = "<div class='zuosanjiao'></div>";
 		if(obj.msgtype == "text"){
-			str = str + "<div class='info-left'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='zuosanjiao'></div><p class='message'>" + obj.content + "</p></div>";
+			str = str + "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div><div class='zuosanjiao'></div><p class='message'>" + obj.content + "</p></div>";
 			var p3 = "<p class='message'>" + obj.content + "</p>";
 			db.transaction(function (tx){
-				tx.executeSql('INSERT INTO '+openid+' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
+				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
 			});	
 		}
 		else if(obj.msgtype == "image"){
 			getMedia(obj.mediaid,obj.msgtype);
-			str = str + "<div class='info-left'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='zuosanjiao'></div><p class='message'><img style='width:100%;' src=" + url + " /></p></div>";
+			str = str + "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div><div class='zuosanjiao'></div><p class='message'><img style='width:100%;' src=" + url + " /></p></div>";
 			var p3 = "<p class='message'><img style='width:100%;' src=" + url + " /></p>";
 			db.transaction(function (tx){
-				tx.executeSql('INSERT INTO '+openid+' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
+				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
+			});
+		}
+		else if(obj.msgtype == "voice"){
+			getMedia(obj.mediaid,obj.msgtype);
+			str = str + "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div><div class='zuosanjiao'></div><p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p></div>";
+			var p3 = "<p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p>";
+			db.transaction(function (tx){
+				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
 			});
 		}
 	} else if(data.message_flag == "2") {
@@ -355,7 +494,27 @@ function concreteOfGetInfo(data,str) {
 			var p2 = "<div class='yousanjiao'></div>";
 			var p3 = "<p class='message'>" + content + "</p>";
 			db.transaction(function (tx){
-				tx.executeSql('INSERT INTO '+openid+' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"right")',[parseInt(data.id),p1,p2,p3]);
+				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"right")',[parseInt(data.id),p1,p2,p3]);
+			});
+		}
+		else if(data.message_type == "image"){
+			getMedia(data.message_value,"image");
+			str = str + "<div class='info-right'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='yousanjiao'></div><p class='message'><img style='width:100%;' src=" + url + " /></p></div>";
+			var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
+			var p2 = "<div class='yousanjiao'></div>";
+			var p3 = "<p class='message'><img style='width:100%;' src=" + url + " /></p>";
+			db.transaction(function (tx){
+				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"right")',[parseInt(data.id),p1,p2,p3]);
+			});
+		}
+		else if(data.message_type == "voice"){
+			getMedia(data.message_value,"voice");
+			str = str + "<div class='info-right'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='yousanjiao'></div><p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p></div>";
+			var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
+			var p2 = "<div class='yousanjiao'></div>";
+			var p3 = "<p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p>";
+			db.transaction(function (tx){
+				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"right")',[parseInt(data.id),p1,p2,p3]);
 			});
 		}
 	}
@@ -363,8 +522,34 @@ function concreteOfGetInfo(data,str) {
 }
 
 function getCacheByPulldown(){
+	$('#fansList').dropload({
+        scrollArea : $("#fansList"),
+        domUp : {
+            domClass   : 'dropload-up',
+            domRefresh : '',
+            domUpdate  : '',
+            domLoad    : ''
+        },
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '',
+            domLoad    : '',
+            domNoData  : ''
+        },
+        loadUpFn : function(me){
+            // 无数据
+            me.noData();
+            me.resetload();
+        },
+        loadDownFn : function(me){
+            // 无数据
+            me.noData();
+            me.resetload();
+        },
+        threshold : 50
+    });
 	$('.content').dropload({
-        scrollArea : window,
+        scrollArea : $(".content"),
         domUp : {
             domClass   : 'dropload-up',
             domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
@@ -373,16 +558,15 @@ function getCacheByPulldown(){
         },
         domDown : {
             domClass   : 'dropload-down',
-            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-            domNoData  : '<div class="dropload-noData">暂无数据</div>'
+            domRefresh : '',
+            domLoad    : '',
+            domNoData  : ''
         },
         loadUpFn : function(me){
-//      	alert();
             db.transaction(function(tx) {
-				var maxid = tx.executeSql("select max(id) from " + openid);
-				var minid = tx.executeSql("select min(id) from " + openid);
-				tx.executeSql('select * from ' + openid + ' order by id', [], function(tx, results) {
+				var maxid = tx.executeSql("select max(id) from \'" + openid+"\'");
+				var minid = tx.executeSql("select min(id) from \'" + openid+"\'");
+				tx.executeSql('select * from \"' + openid + '\" order by id', [], function(tx, results) {
 					var len = results.rows.length,
 						i;
 					var k = 0;
@@ -400,14 +584,13 @@ function getCacheByPulldown(){
 								str = arr.join("");
 							} else {
 								var arr = new Array(2);
-								arr[0] = "<div class='info-left'>" + results.rows.item(i).p1 + results.rows.item(i).p2 + results.rows.item(i).p3 + "</div>";
+								arr[0] = "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div>" + results.rows.item(i).p2 + results.rows.item(i).p3 + "</div>";
 								arr[1] = str;
 								str = arr.join("");
 							}
 							if(k >= 10) {
 								firstId = results.rows.item(i).id;
 								setTimeout(function() {
-									$(".content").prepend(str);
 									// 每次数据加载完，必须重置
 									me.resetload();
 									// 重置索引值，重新拼接more.json数据
@@ -415,6 +598,9 @@ function getCacheByPulldown(){
 									me.unlock();
 									me.noData(false);
 								}, 500);
+								setTimeout(function(){
+									$(".content").prepend(str);
+								},600);
 								break;
 							}
 						} else {
@@ -441,18 +627,20 @@ function getCacheByPulldown(){
 										str = concreteOfGetInfo(data[i], str);
 									}
 									setTimeout(function() {
-										$(".content").prepend(str);
 										me.resetload();
 										if(data.length == 0){
-											me.lock();
+//											me.lock();
 											me.noData();
+											
 										}
 										else{
 											me.unlock();
 											me.noData(false);
 										}
 									}, 500);
-									
+									setTimeout(function(){
+										$(".content").prepend(str);
+									},600);
 								}
 							});
 							break;
@@ -462,7 +650,6 @@ function getCacheByPulldown(){
 			});
         },
         loadDownFn : function(me){
-        	 me.lock();
             // 无数据
             me.noData();
             me.resetload();
@@ -482,4 +669,140 @@ function getMedia(id,type){
 			url = data.url;
 		}
 	});
+}
+function weixinjs(){
+	var mysignature = "";
+	var voice = {
+        localId: '',
+        serverId: ''
+    };
+    var picture = {
+        localId: '',
+        serverId: ''
+    };
+       	$.ajax({
+            type: 'get', async: false,
+            url: 'http://testwx.nbguohe.top/index.php/guohe/weixinjs/getSignature?username=gh_34d563b3398c',
+            data: {"url": window.location.href},
+
+            success: function (data) {
+                mysignature = data;
+            },
+
+            error: function () {
+            }
+        });
+	 wx.config({
+//	 	 debug: true,
+        appId: 'wxb76b3437a5b415b9', // 必填，公众号的唯一标识
+        timestamp: 1414587457, // 必填，生成签名的时间戳
+        nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
+        signature: mysignature + "",// 必填，签名，见附录1
+        jsApiList:['onMenuShareTimeline',
+        	'startRecord', 
+        	'stopRecord', 
+        	'uploadVoice',
+        	'chooseImage', 
+        	'uploadImage'
+        ]  // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: 'ffffffffffffff', // 分享标题
+                link: 'http://h.hiphotos.baidu.com/zhidao/pic/item/0eb30f2442a7d9334f268ca9a84bd11372f00159.jpg', // 分享链接
+                imgUrl: 'http://h.hiphotos.baidu.com/zhidao/pic/item/0eb30f2442a7d9334f268ca9a84bd11372f00159.jpg', // 分享图标
+                success: function () {
+                },
+                cancel: function () {
+                }, fail: function () {
+                }
+            });
+            $(".press-speak").on("touchstart",function(event){
+		    	wx.startRecord();
+		    });
+		    $(".press-speak").on("touchend",function(event){
+		    	wx.stopRecord({
+				    success: function (res) {
+				        voice.localId = res.localId;
+				        wx.uploadVoice({
+						    localId: voice.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+						    isShowProgressTips: 1, // 默认为1，显示进度提示
+						        success: function (res) {
+						        voice.serverId = res.serverId; // 返回音频的服务器端ID
+						        $.ajax({
+						        	type:"get",
+						        	url:apiUrl+"MediaMoveToHisSelf",
+						        	async:false,
+						       		data:{username:username,mediaID:voice.serverId,type:"voice"},
+						       		dataType:"json",
+						       		success:function(data){
+						       			$.ajax({
+								        	type:"get",
+								        	url:apiUrl+"sendMessageOther",
+								        	data:{username:username,openid:openid,media_ID: data.media_id,type:"voice"},
+								        	async:true,
+								        	success:function(data){
+								        	}
+								        });
+						       		}
+						        });
+						    },fail:function(){
+						    }
+						        
+						});
+				    }
+				});
+		    });
+		    $(".upload-pic").click(function(){
+		    	wx.chooseImage({
+				    count: 1, // 默认9
+				    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+				    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+				    success: function (res) {
+				        picture.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+				        wx.uploadImage({
+						    localId: picture.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+						    isShowProgressTips: 1, // 默认为1，显示进度提示
+						    success: function (res) {
+						        picture.serverId = res.serverId; // 返回图片的服务器端ID
+						        $.ajax({
+						        	type:"get",
+						        	url:apiUrl+"MediaMoveToHisSelf",
+						        	async:false,
+						       		data:{username:username,mediaID:picture.serverId,type:"image"},
+						       		dataType:"json",
+						       		success:function(data){
+						       			$.ajax({
+								        	type:"get",
+								        	url:apiUrl+"sendMessageOther",
+								        	data:{username:username,openid:openid,media_ID: data.media_id,type:"image"},
+								        	async:true,
+								        	success:function(data){
+								        	}
+								        });
+						       		}
+						        });
+						    }
+						});
+				    }
+				});
+		    });
+    });
+}
+function playYuying(obj) {
+	var audio = document.getElementById("audio");
+	audio.volume = 1;
+	audio.loop = false;
+//	alert($(obj).attr("data-url"));
+	audio.src = $(obj).attr("data-url");
+//	document.body.appendChild($audio);
+//	audio.pause();
+	audio.play();
+	$(obj).children("img").css("display","none");
+	$(obj).children(".playVoice").css("display","block");
+	audio.addEventListener('ended', function () {  
+    	alert('over');
+    	$(obj).children("img").css("display","block");
+    	$(obj).children(".playVoice").css("display","none");
+	}, false);
 }

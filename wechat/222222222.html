@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <script>
+        var mysignature = "";
+        $.ajax({
+            type: 'get', async: false,
+            url: 'http://testwx.nbguohe.top/index.php/guohe/weixinjs/getSignature',
+            data: {"url": window.location.href},
+
+            success: function (data) {
+                mysignature = data;
+            },
+
+            error: function () {
+                alert(2);
+            }
+        });
+
+        wx.config({
+            appId: 'wx5a9cf87fffd3272f', // 必填，公众号的唯一标识
+            timestamp: 1414587457, // 必填，生成签名的时间戳
+            nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
+            signature: mysignature + "",// 必填，签名，见附录1
+            jsApiList: ['onMenuShareTimeline', 'chooseImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: 'ffffffffffffff', // 分享标题
+                link: 'http://h.hiphotos.baidu.com/zhidao/pic/item/0eb30f2442a7d9334f268ca9a84bd11372f00159.jpg', // 分享链接
+                imgUrl: 'http://h.hiphotos.baidu.com/zhidao/pic/item/0eb30f2442a7d9334f268ca9a84bd11372f00159.jpg', // 分享图标
+                success: function () {
+                    alert(1);
+                },
+                cancel: function () {
+                    alert(2);
+                }, fail: function () {
+                    alert("3");
+                }
+            });
+        });
+
+
+
+
+        function fenxiang() {
+
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    alert(res.localIds);
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<button onclick="fenxiang()">111</button>
+
+</body>
+</html>
