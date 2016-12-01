@@ -1,0 +1,123 @@
+
+body,html{
+	width: 100%;
+}
+li{
+	list-style: none;
+}
+.tishi{
+	width: 100%;
+	line-height: 40px;
+	font-size: 15px;
+	font-weight: 500;
+	font-family: "微软雅黑";
+	color: gray;
+	border-bottom: 1px solid #F1F1F1;
+	padding-left: 20px;
+}
+.content{
+	width: 100%;
+	overflow: hidden;
+}
+.GZH-list li{
+	width: 100%;
+	line-height: 60px;
+	padding-left: 20px;
+	border-bottom: 1px solid #F1F1F1;
+	overflow: hidden;
+}
+
+.GZH-list li .headImg{
+	float: left;
+	height: 50px;
+	margin-top: 5px;
+	border-radius: 50%;
+}
+
+.GZH-list li .nickname{
+	float: left;
+	margin-left: 20px;
+	font-size: 18px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+}
+.GZH-list li .zuojiantou{
+	float: right;
+	margin-right: 40px;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	color: gray;
+}
+.GZH-list li button{
+	float: right;
+	height: 60px;
+	margin-right: 40px;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	color: gray;
+	border: none;
+	background-color: white;
+}
+#bg{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #666;
+	opacity: 0.5;
+	display: none;
+	z-index: 2;
+}
+#adminList{
+	position: fixed;
+	left: calc(15% - 20px);
+	top:500px;
+	width: 70%;
+	padding: 20px 20px 5px;
+	background-color: white;
+	opacity: 0;
+	z-index: 6;
+}
+#adminList p{
+	line-height:30px;
+	font: 15px "微软雅黑";
+	text-align: center;
+	margin-top: 10px;
+	display: none;
+}
+#adminList button{
+	width: 100%;
+	height:40px;
+	border: none;
+	background-color: #048e02;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	margin-top: 20px;
+}
+#adminList ul button{
+	float: right;
+	width: auto;
+	margin: 0;
+	background-color: white;
+	color: black;
+}
+#adminList li{
+	width:100%;
+	line-height: 40px;
+	overflow: hidden;
+}
+#adminList li .nickname{
+	float: left;
+	margin-left: 20px;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+}
+#adminList li .headImg{
+	float: left;
+	height: 30px;
+	margin-top: 5px;
+	border-radius: 50%;
+}

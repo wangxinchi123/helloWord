@@ -39,6 +39,7 @@ function getNowContactInfo(){
 		}
 	});
 }
+
  function init() {
     if(window.openDatabase==undefined){
 		alert("浏览器不支持Web Database!");
@@ -56,15 +57,17 @@ function getNowContactInfo(){
 }
 
 function initAndBind(){	
+	var screenH = window.innerHeight;
 	addQQexpression();
 	var picOrKey = 0;//图片和软键盘切换的标识
 	$(".nav-list").css("margin-left",(window.innerWidth-13*3)/2+"px");
 	$(".nav-list li").eq(0).css("background-color","gray");
 	$(".upload-pic").css("height",$(".others").width()*0.25+"px");
-//	$(".content").css("min-height",window.innerHeight-60+"px");
 	$(".pic").click(function(){
-		$(".press-speak").fadeOut(300);
+		$(".biaoqing").css("display","block");
+		$(".press-speak").css("display","none");
 		if(picOrKey == 1){
+			$("#expression").css({"height":"60px"});
 			$(".enter-word textarea").focus();
 		}
 		else{
@@ -72,47 +75,54 @@ function initAndBind(){
 				$(".sendMsg").css("display","block");
 				$(".others").animate({"top":"260px"},300,function(){
 					$(this).css({"display":"none","top":"60px"});
-//					$(".content").scrollTop($(".content").height()*1.5);
 				});
 				picOrKey=1;
 			}
 			else{
-//				$(".others").css("display","none");
-				var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
+//				var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
 				setTimeout(function(){
 					$(".sendMsg").css("display","block");
-					$("#expression").animate({"height":"260px"},300,function(){
-						clearInterval(timer);
-//						$(".content").scrollTop($(".content").height()*1.5);
+					$("#expression").animate({"height":"260px"},200,function(){
+//						window.scrollTo(0,document.body.scrollHeight);
+						$(".content").animate({"top":"-200px"},300);
+//						clearInterval(timer);
 						picOrKey=1;
 					});
-				},200);	
+				},200);
 			}
 		}
 
 	});
+
 	$("#expression .sendMsg").click(function(){
 		sendMessage();
 	});
 	
 	$(".content").on("touchstart",function(event){
-		$(".press-speak").fadeOut(300);
+		$(".press-speak").css("display","none");
 		$(".enter-word textarea").blur();
-		$("#expression").animate({"height":"60px"},300,function(){
-			$(".others").css("display","none");
-		});
 		$(".sendMsg").css("display","none");
-		$("#fansList").animate({"left":"100%"},300,function(){
-			$("#fansList").css("display","none");
+		$("#fansList").fadeOut(300,function(){
+			$("#fansList").css({"left":"100%"});
+			$(".content").animate({"top":"0"},300);
 		});
+		$(".biaoqing").css("display","none");
+		$("#expression").animate({"height":"60px"},0,function(){
+				$(".others").css("display","none");
+			});
 		picOrKey=0;
 	});
-	$(".enter-word textarea").on("focus",function(){
-		$(".sendMsg").css("display","block");
+	$(".enter-word textarea").on("touchstart",function(){
 		$("#expression").css({"height":"60px"});
-//		$(".content").scrollTop($(".content").height()*1.5);
+	});
+	$(".enter-word textarea").on("focus",function(){
+		
+		$(".content").css({"top":"0"});
+		$(".sendMsg").css("display","block");
+		
 		$(".others").css("display","none");
 		picOrKey=0;
+	}).on("blur",function(){
 	});
 	$(".enter-word textarea").keypress(function(e){
 	    if(e.keyCode === 13) {
@@ -122,8 +132,12 @@ function initAndBind(){
 	    }
 	});
 	$("#xuanfu").click(function(){
+		$(".content").animate({"top":"0"},300);
 		$("#fansList").css("display","block");
-		$("#fansList").animate({"left":"50%"},300);
+		$(".biaoqing").css("display","none");
+		$("#expression").animate({"height":"60px"},0,function(){
+			$("#fansList").animate({"left":"50%"},300);
+		});
 	});
 	
 	$(".yuyin").click(function(){
@@ -134,29 +148,30 @@ function initAndBind(){
 			$(".press-speak").fadeOut(300);
 		}
 		if($("#expression").height()>60){
-			$("#expression").animate({"height":"60px"},300);
+			$(".content").animate({"top":"0"},300);
+			$(".biaoqing").css("display","none");
+			$("#expression").animate({"height":"60px"},0);
 			picOrKey=0;
 		}
 	});
 	$(".upload").click(function(){
-		var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
-		$(".press-speak").fadeOut(300);
-		setTimeout(function(){
+//		var timer = setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},10);
+		$(".press-speak").css("display","none");
 			$(".others").css("display","block");
-				$("#expression").animate({"height":"260px"},300,function(){
-//					$(".content").scrollTop($(".content").height()*1.5);
-					clearInterval(timer);
+			
+				$("#expression").animate({"height":"260px"},0,function(){
+//					clearInterval(timer);
+					window.scrollTo(0,document.body.scrollHeight);
 				});
-			},200);
 			
 	});
 //	InputBoxChange();
 }
 
 function addQQexpression(){
-	$("#expression")[0].addEventListener("touchstart",touchStart,true);
-	$("#expression")[0].addEventListener("touchend",touchEnd,true);
-	$("#expression")[0].addEventListener("touchmove",touchMove,true);
+	$(".biaoqing")[0].addEventListener("touchstart",touchStart,true);
+	$(".biaoqing")[0].addEventListener("touchend",touchEnd,true);
+	$(".biaoqing")[0].addEventListener("touchmove",touchMove,true);
 	var p = 1;
 	nowExpressionIndex = 1;
 	var expressionBox = "expressionBox"+p;
@@ -170,10 +185,10 @@ function addQQexpression(){
 				str = "";
 			}	
 			if(p == 1){
-				$("#expression").append("<div class="+expressionBox+" style='position:absolute;width:100%;overflow:hidden;top:60px;left:0'></div>");
+				$(".biaoqing").append("<div class="+expressionBox+" style='position:absolute;width:100%;height:200px;top:0;left:0;'></div>");
 			}
 			else{
-				$("#expression").append("<div class="+expressionBox+" style='position:absolute;width:100%;overflow:hidden;top:60px;left:100%'></div>");
+				$(".biaoqing").append("<div class="+expressionBox+" style='position:absolute;width:100%;height:200px;top:0;left:100%;'></div>");
 			}
 		}
 		str = str + "<li onclick='addPicInText("+i+")'><img src='QQexpression/"+i+".gif' /></li>";
@@ -230,13 +245,10 @@ function addPicInText(i){
 
 function sendMessage(){
 	var msg = $(".foot .enter-word textarea").val();
-//	alert(msg1);
 	var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
 	var p2 = "<div class='yousanjiao'></div>";
 	var p3 = "<p class='message'>"+msg+"</p>";
-//	$(".content").append("<div class='info-right'>"+p1+p2+p3+"</div>");
 	$(".foot .enter-word textarea").val("");
-//	window.scrollTo(0,document.body.scrollHeight);
 	sendMsgToFans(msg,p1,p2,p3);
 }
 
@@ -254,8 +266,29 @@ function sendMsgToFans(content,p1,p2,p3){
 			dataType:"json",
 			success:function(data){
 				if(data.errcode == "0"){
+					$.ajax({
+					    type:"get",
+					    url:apiUrl+"getMessageList",
+					    async:true,
+					    data:{username:username,openid:openid,ones_lastID:lastId},
+					    dataType:"json",
+					    success:function(data){
+					    	var str1 = "";
+						    for(var i=0;;i++){
+						        if(data.messageList[i] == null){
+						           break;
+						        }
+						        lastId = data.nowChatLastID;
+						       str1 = concreteOfGetInfo(data.messageList[i],str1);
+						    }
+						    if(str1 != ""){
+						    	$(".content").append(str1);
+						    	$(".content").scrollTop($(".content")[0].scrollHeight);
+						    }
+						}
+					});
 //					window.scrollTo(0,document.body.scrollHeight);
-	//				dbObject.put({ p1: p1, p2: p2, p3: p3,mark: "right" },parseInt(data.id));
+//					dbObject.put({ p1: p1, p2: p2, p3: p3,mark: "right" },parseInt(data.id));
 				}
 			}
 		});
@@ -324,19 +357,20 @@ function getinfo(tx){
 			    data:{username:username,openid:openid,ones_lastID:lastId},
 			    dataType:"json",
 			    success:function(data){
-			    	console.log(data);
+			    	console.log(data)
 			    	var str1 = "";
 			    	var str2 = "";
 				    for(var i=0;;i++){
 				        if(data.messageList[i] == null){
 				           break;
 				        }
-				        lastId = data.nowChatLastID;
-				       str1 = concreteOfGetInfo(data.messageList[i],str1);
+				        if(data.messageList[i].message_flag == "1"){
+				        	lastId = data.nowChatLastID;
+				        	str1 = concreteOfGetInfo(data.messageList[i],str1);
+				        }
 				    }
 				    if(str1 != ""){
 				    	$(".content").append(str1);
-//				    	$(".content").scrollTop();
 				    }
 				    var myheadimgurl;
 				    if(theFirstTime == 1){
@@ -401,7 +435,6 @@ function jumpContact(myid){
 	headimgUrl = "img/fenxiaozhu.png";
 	getNowContactInfo();
 	db.transaction(function (tx) {
-//  	tx.executeSql("DROP TABLE o8J2PwiYrse4M8QucNE4ZAliPZzo");
         tx.executeSql("create table if not exists \""+openid+"\" (id unique, p1, p2, p3, mark)");
         getinfo(tx);
    	});
@@ -422,7 +455,7 @@ function getInfoInCache(str){
 		       str = concreteOfGetInfo(data.messageList[i],str);
 		    }
 		    $(".content").append(str);
-		    $(".content").scrollTop(window.innerHeight);
+		    $(".content").scrollTop($(".content")[0].scrollHeight);
 		}
 	});
 }
@@ -443,7 +476,7 @@ function getInfoFromServer(str){
 		        str =concreteOfGetInfo(data.messageList[i],str);
 		    }
 		    $(".content").append(str);
-		    $(".content").scrollTop(window.innerHeight);
+		    $(".content").scrollTop($(".content")[0].scrollHeight);
 		}
 	});
 }
@@ -471,8 +504,8 @@ function concreteOfGetInfo(data,str) {
 		}
 		else if(obj.msgtype == "voice"){
 			getMedia(obj.mediaid,obj.msgtype);
-			str = str + "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div><div class='zuosanjiao'></div><p class='message' onclick='playYuying(this)'><img style='width:100px;' src='img/yuyingMsg.png' /></p></div>";
-			var p3 = "<p class='message' onclick='playYuying(this)'><img style='width:100px;' src='img/yuyingMsg.png' /></p><audio src="+url+" ></audio>";
+			str = str + "<div class='info-left'><div class='touxiang'><img src="+headimgUrl+"/></div><div class='zuosanjiao'></div><p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p></div>";
+			var p3 = "<p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p>";
 			db.transaction(function (tx){
 				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"left")',[parseInt(data.id),p1,p2,p3]);
 			});
@@ -509,10 +542,10 @@ function concreteOfGetInfo(data,str) {
 		}
 		else if(data.message_type == "voice"){
 			getMedia(data.message_value,"voice");
-			str = str + "<div class='info-right'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='yousanjiao'></div><p class='message' onclick='playYuying(this)'><img style='width:100px;' src='img/yuyingMsg.png' /></p><audio src="+url+" ></audio></div>";
+			str = str + "<div class='info-right'><div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div><div class='yousanjiao'></div><p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p></div>";
 			var p1 = "<div class='touxiang'><img src='img/c3d0eab5ff273d6087f181aba9735c14.jpg'/></div>";
 			var p2 = "<div class='yousanjiao'></div>";
-			var p3 = "<p class='message' onclick='playYuying(this)'><img style='width:100px;' src='img/yuyingMsg.png' /></p><audio src="+url+" ></audio>";
+			var p3 = "<p class='message' data-url="+url+" onclick='playYuying(this)'><img style='width:30px;' src='img/yuyingMsg.png' /><img class='playVoice' src='img/shengyin.gif' /></p>";
 			db.transaction(function (tx){
 				tx.executeSql('INSERT INTO \''+openid+'\' (id, p1,p2,p3,mark) VALUES (?, ?,?,?,"right")',[parseInt(data.id),p1,p2,p3]);
 			});
@@ -790,7 +823,16 @@ function weixinjs(){
     });
 }
 function playYuying(obj) {
-	var adu = $(obj).next();
-	adu[0].volume = 1.0;
-	adu[0].play();
+	var audio = document.getElementById("audio");
+	audio.volume = 1;
+	audio.loop = false;
+	audio.src = $(obj).attr("data-url");
+	audio.play();
+	$(obj).children("img").css("display","none");
+	$(obj).children(".playVoice").css("display","block");
+	audio.addEventListener('ended', function () {  
+    	alert('over');
+    	$(obj).children("img").css("display","block");
+    	$(obj).children(".playVoice").css("display","none");
+	}, false);
 }

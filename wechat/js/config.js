@@ -98,12 +98,12 @@ imgArray2[37] = "/:shake";
 imgArray2[38] = "/:love";
 imgArray2[39] = "/:jump";
 imgArray2[40] = "/:pig";
-imgArray2[41] = "hug";
+imgArray2[41] = "/:hug";
 imgArray2[42] = "/:cake";
 imgArray2[43] = "/:li";
 imgArray2[44] = "/:bome";
 imgArray2[45] = "/:kn";
-imgArray2[46] = "footb";
+imgArray2[46] = "/:footb";
 imgArray2[47] = "/:shit";
 imgArray2[48] = "/:coffee";
 imgArray2[49] = "/:eat";
@@ -174,6 +174,10 @@ function analysisXML(data){
 	else if(obj.msgtype == "image"){
 		obj.picurl = $(a).find("PicUrl").text();
 		obj.mediaid = $(a).find("MediaId").text();
+	}
+	else if(obj.msgtype == "voice"){
+		obj.mediaid = $(a).find("MediaId").text();
+		obj.format = $(a).find("Format").text();
 	}
 	return obj;
 }

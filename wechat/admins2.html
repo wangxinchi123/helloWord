@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>同意成为管理员</title>
+	<style type="text/css">
+		#verification{
+			display: block;
+			width: 95%;
+			height: 46px;
+			margin: 0 auto;
+			margin-top: 230px;
+			color: white;
+			background-color: #1aad19;
+			font: 18px "微软雅黑";
+			border: none;
+			border-radius: 5px;
+		}
+		#tishi{
+			width: 100%;
+			font: 14px "微软雅黑";
+			color: gray;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+	<button id="verification">同意成为管理员</button>
+	<p id="tishi"></p>
+
+</body>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+   	<script src="//res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <script src="../js/common.js"></script>
+<script>
+    var FXZ_WXJS_READY_FLAG = 0;//微信JS配置完毕标志,0未完成,1完成
+    var wxopenid = "";//粉小猪全局变量,,当前用户openid
+    var access_code = "";
+    getopenid ();
+
+
+	$("#verification").click(function(){
+		var str = window.location.href.split("?")[1];
+        	var openid = str.split("&")[0].split("=")[1];
+        	var fxz_code = str.split("&")[1].split("=")[1];
+        	var username = str.split("&")[2].split("=")[1];
+			$.ajax({
+				type: "get",
+				url: FXZ_URL + "/index.php/user/user/addAdministrators2",
+				async: true,
+				data: {
+					username:username,
+					openid:openid,
+					openid2:wxopenid,
+					fxz_code:fxz_code
+				},
+				dataType: "json",
+				success: function(data) {
+					$("#tishi").html(data.info);
+				}
+			});
+	});
+
+
+
+    function getopenid() {
+        wxopenid = getcookie('wxopenid');
+        access_code = GetQueryString('code');
+        if (wxopenid == "") {
+            if (access_code == null) {
+                var fromurl = location.href;
+                var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb76b3437a5b415b9&redirect_uri=' + fromurl + '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+                window.location.href = url;
+            }
+            else {
+                $.ajax({
+                    type: 'get',
+                    url:  'http://testwx.nbguohe.top/index.php/user/user/oauth',
+                    async: false,
+                    cache: false,
+                    data: {code: access_code},
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result != null && result.hasOwnProperty('openid') && result.openid != "") {
+                            addcookie('wxopenid', result.openid, 360000);
+                            getlogininfo(result.openid);
+                            wxopenid=result.openid;
+                        }
+                        else {
+                            window.location.href= fromurl;
+                        }
+                    }
+                });
+            }
+        }
+        else
+        {
+        	
+        }
+
+    }
+
+
+
+</script>
+</html>
