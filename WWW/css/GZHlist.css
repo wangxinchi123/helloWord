@@ -1,0 +1,94 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.box{
+	min-height: 600px;
+	border: 1px solid gray;
+	margin: 30px 20px 0;
+	padding: 10px 10px;
+}
+
+.box .nav-bar{
+	overflow: hidden;
+	background-color: gray;
+}
+.box .nav-bar li{
+	float: left;
+	width: calc(100% / 3 - 1px);
+	list-style: none;
+	margin-left: 1px;
+}
+.box .nav-bar li.first{
+	width: calc(100% / 3);
+	margin-left: 0;
+	background-color: #7cbae5;
+}
+.box .nav-bar li.second{
+	background-color: #60d295;
+}
+.box .nav-bar li.last{
+	background-color: #66d2c6;
+}
+.box .nav-bar li a{
+	display: block;
+	height: 96px;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+	font: 18px "微软雅黑";
+	line-height: 96px;
+}
+
+.box .GZHlist{
+	margin-top: 20px;
+	border-top: 1px solid lightgray;
+}
+.box .GZHlist li{
+	overflow: hidden;
+	list-style: none;
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid lightgray;
+}
+.box .GZHlist li.first{
+	margin-top: 10px;
+	border-bottom: 1px solid lightgray;
+}
+.box .GZHlist li div{
+	float: left;
+	width: 25%;
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+.box .GZHlist div.GZHname img{
+	width: 40px;
+	height: 40px;
+	margin-top: 10px;
+}
+.box .GZHlist div.GZHname p{
+	line-height: 20px;
+}
+.box .GZHlist div.vipLevel{
+	line-height: 70px;
+}
+.box .GZHlist div.times p{
+	line-height: 25px;
+}
+.box .GZHlist div.times p:nth-child(3){
+	font-size: 14px;
+	color: #44b549;
+}
+.box .GZHlist div.operate button{
+	border: none;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	background-color: #44B549;
+	color: white;
+	padding: 5px 10px;
+	margin-top: 20px;
+}
