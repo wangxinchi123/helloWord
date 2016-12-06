@@ -1,0 +1,54 @@
+
+.content-right{
+	position: relative;
+	float: left;
+	width: 80%;
+	padding: 20px 20px 40px;
+	border: 1px solid lightgray;
+	border-left: none;
+	box-sizing: border-box;
+}
+.content-right h3{
+	width: 100%;
+	line-height: 40px;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	font-weight: 500;
+}
+.content-right ul{
+	border: 1px solid lightgray;
+	margin-top: 10px;
+}
+.content-right li{
+	padding: 10px 10px;
+	list-style: none;
+	border-bottom: 1px solid lightgray;
+	overflow: hidden;
+}
+.content-right li:last-child{
+	border-bottom: none;
+}
+.content-right li span{
+	display: block;
+	float: left;
+	line-height: 30px;
+	width: 200px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: gray;
+}
+.content-right li div{
+	float: left;
+}
+.content-right .gzh-name,
+.content-right .message-days,
+.content-right .erweima-days{
+	line-height: 30px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+.content-right .gzh-logo img{
+	display: block;
+	width: 80px;
+	height: 80px;
+}

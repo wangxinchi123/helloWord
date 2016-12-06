@@ -54,6 +54,9 @@
 					url:apiurl+"login_pc",
 					async:false,
 					dataType:"json",
+					xhrFields: {
+            			withCredentials: true
+      				 },
 					success:function(data){
 						$("#code img").attr("src",data.imgURL);
 						$("#code").css("display","block");
@@ -80,11 +83,26 @@
 					type:"get",
 					url:apiurl+"checkScanCode",
 					async:true,
-					data:{login_id:loginid},
+					xhrFields: {
+           				 withCredentials: true
+        			},
+					
 					dataType:"json",
 					success:function(data){
 						if(data.success == "true"){
-							window.location.href = "GZHlist.html";
+							$.ajax({
+								type:"get",
+								url:apiurl+"author",
+								async:true,
+								xhrFields: {
+			           				 withCredentials: true
+			        			},
+			        			dataType:"json",
+			        			success:function(data){
+			        				$.cookie("url",data.url);
+			        				window.location.href = "GZHlist.html";
+			        			}
+							});
 							$.cookie("openid",data.openid);
 						}
 					}
