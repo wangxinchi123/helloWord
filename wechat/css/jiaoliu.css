@@ -352,3 +352,20 @@ body{
 	display:none;
 	padding: 2.5px 0;
 }
+
+#showBigPic{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	display: none;
+	z-index: 20;
+}
+#showBigPic img{
+	margin-top: 0;
+	margin-left: 0;
+	max-width: 100%;
+	display: none;
+}
