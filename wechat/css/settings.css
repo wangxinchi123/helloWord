@@ -1,0 +1,123 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body,html{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	background-color: #F3F3F3;
+}
+
+.userinfo{
+	padding: 10px 20px;
+	margin-top: 10px;
+	overflow: hidden;
+	background-color: white;
+}
+.userinfo img{
+	float: left;
+	width: 50px;
+	height: 50px;
+	
+}
+.userinfo p{
+	float: left;
+	line-height: 50px;
+	margin-left: 50px;
+	font-family: "微软雅黑";
+	font-size: 18px;
+}
+
+.replyInterval{
+	margin-top: 10px;
+	background-color: white;
+	padding: 10px 20px;
+}
+.replyInterval .set-time{
+	font-family: "微软雅黑";
+	font-size: 16px;
+	overflow: hidden;
+}
+.replyInterval .set-time span{
+	float: left;
+	line-height: 30px;
+}
+.replyInterval .set-time div{
+	float: right;
+	line-height: 26px;
+	font-family: "微软雅黑";
+	font-size: 26px;
+}
+.replyInterval .set-time .now-reply-time{
+	float: left;
+	line-height: 30px;
+	margin-right: 40px;
+	font-size: 16px;
+	color: gray;
+}
+/*.replyInterval .set-time .anniu{
+	position: relative;
+	float: right;
+	line-height: 20px;
+	margin-right: 0;
+	padding: 5px 10px 5px 30px;
+	background-color: lightgray;
+	border-radius: 20px;
+}
+
+.replyInterval .set-time .anniu .circle{
+	position: absolute;
+	top:2px;
+	left: 2px;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background-color: white;
+}*/
+
+.replyInterval .seekbar{
+	height: 0;
+	overflow: hidden;
+	/*display: none;*/
+}
+.replyInterval .seekbar .line{
+	position: relative;
+	height: 0;
+	width: 100%;
+	border: 1px solid lightblue;
+	margin-bottom: 30px;
+	margin-top: 50px;
+}
+.replyInterval .seekbar .line span{
+	position: absolute;
+	top: -10px;
+	left: -1px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: lightblue;
+}
+.replyInterval .seekbar .reply-time{
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+.replyInterval .seekbar button{
+	width: 100%;
+	height: 40px;
+	margin-top: 20px;
+	border: none;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	border-radius: 5px;
+}
+.replyInterval .seekbar .open{
+	background-color: #44b549;
+}
+.replyInterval .seekbar .close{
+	background-color: #e64340;
+}

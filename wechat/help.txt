@@ -1,0 +1,9 @@
+index.html    用户与粉丝交流页面
+
+authorize.html  管理员授权页面
+
+selectGZH.html  公众号添加管理员页面
+
+setDefaultGZH.html  设置默认公众号页面
+
+settings.html   设置页面
