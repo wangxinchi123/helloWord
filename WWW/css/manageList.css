@@ -1,0 +1,121 @@
+
+.content-right .guide{
+	line-height: 30px;
+	background-color: #eee;
+	padding: 10px 20px;
+	font-size: 15px;
+	font-family: "微软雅黑";
+}
+.content-right .addManage{
+	float: right;
+	line-height: 30px;
+	margin-top: 10px;
+	padding: 5px 10px;
+	background-color: #44b549;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	cursor: pointer;
+}
+.content-right .managerNum{
+	float: left;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	line-height: 30px;
+	margin-top: 10px;
+}
+.content-right .manage-list{
+	margin-top: 20px;
+	padding: 10px 10px;
+	border: 1px solid lightgray;
+	min-height: 70px;
+}
+.content-right .manage-list li{
+	list-style: none;
+	overflow: hidden;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid lightgray;
+}
+.content-right .manage-list li:last-child{
+	border-bottom: none;
+}
+.content-right .manage-list li div{
+	float: left;
+}
+.content-right .manage-list li .head-img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.content-right .manage-list li img{
+	width: 100%;
+	height: 100%;
+}
+.content-right .manage-list li .nickname{
+	margin-left: 50px;
+	line-height: 50px;
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+.content-right .manage-list li .open-upload,
+.content-right .manage-list li .open-message{
+	position: relative;
+	float: right;
+	padding: 8px 20px;
+	padding-right: 40px;
+	margin-right: 100px;
+	margin-top: 8px;
+	background-color: #44b549;
+	border-radius: 20px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: white;
+	cursor: pointer;
+}
+
+.content-right .manage-list .small-circle{
+	position: absolute;
+	top: 3px;
+	right: 1px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: white;
+}
+
+#erweima{
+	position: fixed;
+	top: calc(50% - 190px);
+	left: calc(50% - 168px);
+	width: 256px;
+	height: 300px;
+	padding: 40px 40px 0;
+	z-index: 20;
+	background-color: white;
+	display: none;
+}
+#erweima p{
+	line-height: 44px;
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 15px;
+}
+#erweima .erweima-box{
+	width: 256px;
+	height: 256px;
+}
+#erweima .close{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 26px;
+	height: 26px;
+	padding: 5px 5px;
+	cursor: pointer;
+}
+#erweima .close img{
+	width: 100%;
+	height:100%;
+}
