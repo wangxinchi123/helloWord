@@ -19,8 +19,7 @@ $("header .gzh-switch").on("mouseenter",function(){
 	$("header .gzh-switch .shangsanjiao").css("display","none");
 });
 
-$(".content .content-right").css("min-height",document.body.scrollHeight-230+"px");
-$(".content .content-left").css("height",$(".content .content-right").outerHeight()+"px");
+$(".content .content-right").css("min-height",document.body.scrollHeight-234+"px");
 
 
 getgzhList();

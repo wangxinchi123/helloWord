@@ -23,31 +23,67 @@ body{
 	background-color: white;
 	border: 1px solid lightgray;
 	display: none;
+	overflow: hidden;
 }
-#allFenZu ul{
-	max-height: 180px;
-	overflow: auto;
-}
-#allFenZu img{
-	position: absolute;
-	right: 8px;
-	top: 8px;
-	width: 20px;
-	height: 20px;
+#allFenZu .addGroup{
+	width: 100%;
+	height: 30px;
+	background: url(../img/add.png) no-repeat center center;
+	background-size: 30px 30px;
+	border-top: 1px dashed lightgray;
 	cursor: pointer;
 }
+#allFenZu ul{
+	width: 200px;
+	max-height: 180px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
 #allFenZu li{
-	width: 100%;
+	position: relative;
+	width: 130px;
 	line-height: 30px;
 	text-align: center;
 	list-style: none;
 	font-family: "微软雅黑";
 	font-size: 14px;
 }
+#allFenZu li p{
+	width: calc(100% - 28px);
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 #allFenZu li:hover{
 	background-color: #44b549;
 	color: white;
 	cursor: pointer;
+}
+#allFenZu li img{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 16px;
+	height: 16px;
+	padding: 7px 6px;
+	/*background-color: white;*/
+	z-index: 10;
+}
+/*#allFenZu li:hover img{
+	opacity: 1;
+}*/
+#allFenZu li input{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 102px;
+	height: 30px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	padding-left: 5px;
+	box-sizing: border-box;
+	z-index: 10;
+	display: none;
 }
 #codeBox{
 	position: fixed;
@@ -100,8 +136,9 @@ body{
 .content-right table th{
 	font-family: "微软雅黑";
 	font-size: 14px;
-	padding: 3px 5px;
+	line-height: 30px;
 	text-align: center;
+	word-break:break-all;
 }
 .content-right table th{
 	font-size: 15px;
@@ -113,26 +150,44 @@ body{
 	width: 15%;
 }
 .content-right table .fenzu{
-	position: relative;
 	width: 15%;
-	padding-right: 20px;
 }
 .content-right table td.fenzu{
 	cursor: pointer;
 }
-.content-right table .fenzu:hover img{
-	display: block;
-}
 .content-right table .fenzu img{
-	position: absolute;
-	bottom: 5px;
-	right: 5px;
+	float: right;
 	width: 16px;
 	height: 16px;
-	display: none;
+	padding: 7px 7px;
 }
-.content-right table .createtime{
+.content-right table .remark{
+	position: relative;
 	width: 25%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.content-right table .remark img{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 16px;
+	height: 16px;
+	padding: 7px 7px;
+	z-index: 22;
+}
+.content-right table .remark input{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 30px;
+	line-height: 30px;
+	width: calc(100% - 28px);
+	font-family: "微软雅黑";
+	font-size: 14px;
+	padding-left: 6px;
+	box-sizing: border-box;
+	z-index: 22;
 }
 .content-right table .erweima{
 	width: 15%;

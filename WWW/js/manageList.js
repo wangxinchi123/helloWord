@@ -108,7 +108,12 @@ function getManageList(pflag){
 	    success:function(data){
 	    	var str1 = "";
 	    	for(var i=0;i<data.admins.length;i++){
-	    		str1 = str1 + "<li><div class='head-img'><img src="+data.admins[i].headimgurl+" /></div><div class='nickname'>"+data.admins[i].nickname+"</div><div class='open-upload' onclick='openUpload(this)'><p>打开素材上传</p><span class='small-circle'></div><div class='open-message' onclick='openMessage(this)'><p>打开消息助手</p><span class='small-circle'></sapn></div></li>";
+	    		if(data.admins[i].headimgurl == ""){
+	    			str1 = str1 + "<li><div class='head-img'><img src='img/滑稽.jpg' /></div><div class='nickname'>"+data.admins[i].nickname+"</div><div class='open-upload' onclick='openUpload(this)'><p>打开素材上传</p><span class='small-circle'></div><div class='open-message' onclick='openMessage(this)'><p>打开消息助手</p><span class='small-circle'></sapn></div></li>";
+	    		}
+	    		else{
+	    			str1 = str1 + "<li><div class='head-img'><img src="+data.admins[i].headimgurl+" /></div><div class='nickname'>"+data.admins[i].nickname+"</div><div class='open-upload' onclick='openUpload(this)'><p>打开素材上传</p><span class='small-circle'></div><div class='open-message' onclick='openMessage(this)'><p>打开消息助手</p><span class='small-circle'></sapn></div></li>";
+	    		}
 	    		if(i%8 == 0){
 	    			$(".content-right .manage-list ul").append(str1);
 	    			str1 = "";

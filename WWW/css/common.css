@@ -11,6 +11,13 @@ body,html{
 body{
 	background-color: #e7e8eb;
 }
+
+#topline{
+	width: 100%;
+	height: 0;
+	border: 1px solid #44b549;
+}
+
 header{
 	height: 50px;
 	background-color: white;
@@ -225,13 +232,13 @@ header .gzh-switch li:last-child{
 	margin: 0 auto;
 	margin-top: 40px;
 	background-color: white;
+	border:1px solid lightgray;
 	overflow: hidden;
 }
 .content-left{
 	float: left;
 	width: 20%;
 	padding: 20px 0 40px;
-	border: 1px solid lightgray;
 	color: black;
 	box-sizing: border-box;
 }
@@ -286,8 +293,7 @@ header .gzh-switch li:last-child{
 	float: left;
 	width: 80%;
 	padding: 20px 20px 40px;
-	border: 1px solid lightgray;
-	border-left: none;
+	border-left: 1px solid lightgray;
 	box-sizing: border-box;
 }
 .content-right h3{
