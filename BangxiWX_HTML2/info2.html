@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/info2.css"/>
+	</head>
+	<body>
+		<div id='wx_pic' style='margin:0 auto;display:none;'>
+    <img src='img/logo.png'/>
+</div>
+<div class="container">
+    <div class="content_01">
+        <center>
+        <img src="img/40439923760853.jpg" width="350">
+
+    </center>
+    </div>
+    <br>
+    <br>
+    <form action="" id="myForm">
+        <ul>
+
+            <li class="sexli">
+                <span class="spanleft">性别:</span>
+                <span class="spanright">
+							<img id="sex1" class="imgborder" src="img/男.png" width="60" height="80">
+							<img id="sex0" src="img/女.png" width="60" height="80">
+							<input type="hidden" name="sex" value="1" id="textSex">
+						</span>
+            </li>
+            <li id="phoneNumli">
+                <span class="spanleft">手机号:</span>
+                <span class="spanright">
+							<input id="textPhone" type="text" maxlength="11" name="tel"
+                                   onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+							<input type="button" id="btnSendYZM" value="发送验证码">
+						</span>
+            </li>
+            <li id="phoneYZMli">
+                <span class="spanleft">验证码:</span>
+                <span class="spanright">
+							<input id="textYZM" type="text" maxlength="4"
+                                   onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+						</span>
+            </li>
+
+            <li id="li_sex" style="display: none">
+                <span class="spanleft">姓:</span>
+                <span class="spanright">
+							<input id="textName" type="text" maxlength="1" name="name">
+						</span>
+            </li>
+
+            <li>
+                <center>
+							<span class="spancenter">
+								<input id="buttonSubmit1" type="button"
+                                       style="background: url(img/68218.png); background-size: cover; width: 100px; height: 100px; border: 0px;"
+                                       >
+                            </span>
+                </center>
+            </li>
+
+        </ul>
+    </form>
+</div>
+
+<div style="text-align: center;">
+    <a id="lastUrl" style="font-size: 18px; display: none;">查看上一次结果</a>
+</div>
+<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/errorMessage.js"></script>
+<script src="js/info2.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

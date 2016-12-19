@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/fillInfo.css"/>
+	</head>
+	<body>
+		<div class="box">
+			<img class="back" src="img/back.png"/>
+			<img class="biaoti" src="img/p6-biaoti.png"/>
+			<form action="" method="" id="myForm">
+			<div class="box1">
+				<div class="school">
+					<p>学校</p>
+					<input type="text" name="school" id="xuexiao" value="" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+				</div>
+				<div class="profession">
+					<p>专业</p>
+					<input type="text" name="major" id="zhuanye" value="" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+				</div>
+				<div class="name">
+					<p>姓氏</p>
+					<input type="text" name="name" id="xingshi" value="" maxlength="1" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+				</div>
+				<div class="xiayibu"></div>
+			</div>
+			<div class="box2">
+				<div class="phoneNumber">
+					<p>手机号</p>
+					<input type="number" name="tel" id="shoujihao" value="" />
+				</div>
+				<div class="sendCode">
+					<img src="img/p6-fasong.png"/>
+				</div>
+				<div class="code">
+					<p>验证码</p>
+					<input type="text" name="" id="yanzhengma" value="" />
+				</div>
+				<div class="sex">
+					<p>性别</p>
+					<label id="sex-nan"><span>男</span><img src="img/weixuanzhong.png"></label>
+					<label id="sex-nv"><span>女</span><img src="img/weixuanzhong.png"></label>
+				</div>
+				<div class="graduation">
+					<p>毕业年份</p>
+					<select name="graduateyear">
+						
+					</select>
+				</div>
+				<div class="sub"></div>
+			</div>
+			<input type="hidden" name="openid" id="openid" value="22" />
+			<input type="hidden" name="from_id" id="from_id" value="bangxi" />
+			<input type="hidden" name="sex" id="sex" value="0" />
+			</form>
+		
+		</div>
+		<script src="chart/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/fillInfo.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

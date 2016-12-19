@@ -1,0 +1,501 @@
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body,html{
+	height: 100%;
+}
+body {
+	background: url('../img/图层-8.png');
+}
+
+#page1{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#page2,
+#page3,
+#page4,
+#page5,
+#page6,
+#page7,
+#page8{
+	position: absolute;
+	top: 0;
+	left: 100%;
+}
+#myForm{
+	height: 100%;
+}
+.swiper-container{
+	height: 100%;
+}
+.swiper-wrapper{
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+
+
+.divnone {
+	display: none;
+}
+
+.page {
+	font-size: 15px;
+	width: 100%;
+	height: 650px;
+}
+
+.topbar {
+	font-size: 15px;
+	height: 45px;
+	width: 100%;
+	background-color: #2a7fd4;
+	z-index: 112;
+	-webkit-touch-callout:none;
+-webkit-user-select:none;
+-khtml-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none;
+}
+
+.topbar table {
+	font-size: 15px;
+	width: 100%;
+}
+.topbar table .td5{
+	font-size: 18px;
+	text-align: center;
+	color: white;
+}
+.topbar tr td {
+	font-size: 15px;
+	width: 32%;
+	height: 45px;
+	
+}
+.topbar tr td a{
+	display: block;
+	overflow: hidden;
+}
+.spantop1 {}
+
+.btn1 {
+	height: 35px;
+	color: white;
+	width: 95px;
+	text-align: center;
+	line-height: 35px;
+	margin: 0 5px;
+	padding-right: 0px;
+	border: 0px solid;
+	border-radius: 55px 15px 15px 55px;
+	float: left;
+	font-size: 15px;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+.btn2 {
+	font-size: 15px;
+	height: 45px;
+	color: white;
+	background: url(img/bgbtn2.png);
+	display: inline-block;
+	width: 60%;
+	text-align: center;
+	line-height: 45px;
+	padding-right: 6px;
+	border: 0px solid;
+	border-radius: 25px;
+	margin: 2px auto;
+	font-size: 18px;
+}
+
+.p1btn2 {
+	font-size: 15px;
+	height: 45px;
+	color: white;
+	background: url(img/bgbtn2.png);
+	display: none;
+	width: 60%;
+	text-align: center;
+	line-height: 45px;
+	margin: 5px 5px;
+	padding-right: 6px;
+	border: 0px solid;
+	border-radius: 25px;
+	margin: 15px auto;
+}
+
+.content1 {
+	font-size: 15px;
+	width: 90%;
+	height: 100px;
+	margin: 10px auto;
+}
+
+.btnnext {
+	font-size: 15px;
+	height: 45px;
+	color: white;
+	background: linear-gradient(rgb(128, 183, 212), rgb(86, 151, 192), rgb(30, 111, 169), rgb(15, 99, 160), rgb(15, 96, 154));
+	display: none;
+	width: 50%;
+	text-align: center;
+	line-height: 45px;
+	margin: 5px 5px;
+	padding-right: 6px;
+	border: 0px solid;
+	border-radius: 25px;
+	position: absolute;
+	bottom: 50px;
+	left: 25%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+.contenttext {
+	font-size: 15px;
+	width: 90%;
+	height: auto;
+	color: white;
+	margin: 5px auto;
+	
+	font-size: 20px;
+	line-height: 25px;
+}
+
+ul {
+	list-style: none;
+	font-size: 0px;
+}
+
+.p1li {
+	font-size: 15px;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	margin: 2px;
+	background-image: url(img/1.jpeg);
+	background-size: 100% 100%;
+	font-size: 0px;
+	position: relative;
+	float: left;
+}
+
+.p1span {
+	font-size: 15px;
+	font-size: 55px;
+	line-height: 60px;
+	font-family: "方正喵呜体", Arial;
+	color: yellow;
+	height: calc(100% - 25px);
+	width: 100%;
+	margin: 0px;
+	z-index: 111;
+	position: relative;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.p1spans {
+	font-size: 15px;
+	z-index: 112;
+	font-size: 18px;
+	
+	color: white;
+	height: 25px;
+	line-height: 25px;
+	width: 100%;
+	display: block;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.5);
+	float: left;
+	bottom: 0px;
+	padding-top: 1px;
+	position: absolute;
+	bottom: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.p1li .p1spangreen {
+	background: rgba(0, 255, 51, 1);
+}
+
+
+/*<!--  页面2  -->*/
+
+.contentb {
+	width: 90%;
+	height: 100px;
+	margin: 10px auto;
+}
+
+.contentb {
+	width: 90%;
+	height: 100px;
+	margin: 10px auto;
+}
+
+.p2li {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	margin: 2px;
+	background-image: url(img/1.jpeg);
+	background-size: 100% 100%;
+	font-size: 0px;
+	position: relative;
+	float: left;
+}
+
+.p2span {
+	font-size: 55px;
+	line-height: 60px;
+	
+	color: white;
+	height: calc(100% - 25px);
+	width: 100%;
+	margin: 0px;
+	z-index: 111;
+	position: relative;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.p2spans {
+	z-index: 112;
+	font-size: 18px;
+	
+	color: white;
+	height: 25px;
+	line-height: 25px;
+	width: 100%;
+	display: block;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.5);
+	float: left;
+	bottom: 0px;
+	padding-top: 1px;
+	position: absolute;
+	bottom: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.p2li .p2spangreen {
+	background: rgba(0, 255, 51, 1);
+}
+
+<!--
+/*页面9*/
+
+
+
+
+
+
+
+.jingdutiao{
+	width: 100%;
+	
+}
+
+.jingdutiao .line1{
+	float: left;
+	height: 0;
+	width: 12.5%;
+	border: 2px solid #66cc66;
+	border-left: none;
+	border-right: none;
+	background-color: #66cc66;
+}
+.jingdutiao .line2{
+	float: right;
+	height: 0;
+	width: 87.5%;
+	border: 2px solid #cccccc;
+	border-left: none;
+	border-right: none;
+	background-color: #cccccc;
+}
+.pingjiaContent {
+	padding-top: 20px;
+	padding-left: 15px;
+}
+.pingjiaContent li{
+	position: relative;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	color: white;
+}
+.pingjiaContent li p{
+	width: 110px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+.emoji1{
+	position: absolute;
+	right: 60px;
+	height: 40px;
+	line-height: 40px;
+	top: 0;
+	color: red;
+	/*background-color: white;*/
+	z-index: 2;
+}
+* {
+			margin: 0px;
+			padding: 0px;
+		}
+		#line{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 9;
+			overflow: hidden;
+		}
+		html,body{
+			width: 100%;
+		}
+		.pingjia {
+			background-color: white;
+            display: none;
+        }
+
+		.pingjia .pingjiaContent{
+			
+			/*padding-bottom: 60px;*/
+		}
+        .pingjia .pingjiaContent table {
+            margin: 5px auto;
+            text-align: center;
+            font-size: 15px;
+        }
+		.pingjia .pingjiaContent center{
+			height: 60px;
+			position: relative;
+		}
+        .pingjia .submitbtn {
+        	position: absolute;
+        	left: calc(50% - 100px);
+        	bottom: 10px;
+            font-size: 15px;
+            height: 45px;
+            color: white;
+            background: linear-gradient(rgb(128, 183, 212), rgb(86, 151, 192), rgb(30, 111, 169), rgb(15, 99, 160), rgb(15, 96, 154));
+            width: 200px;
+            text-align: center;
+            line-height: 45px;
+            margin: 5px 5px;
+            border: 0px solid;
+            border-radius: 25px;
+            z-index: 10;
+        }
+
+        .pingjia .pingjiaContent tr {
+            height: 35px;
+            border: 0px;
+        }
+        .pingjia .pingjiaContent tr td{
+        	position: relative;
+        }
+		.pingjia td img{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 15px;
+			height: 15px;
+			z-index: 10;
+		}
+        .pingjia .td1 {
+            width: 30vw;
+            font-size: 18px;
+            height: 50px;
+            line-height: 35px;
+        }
+
+        .pingjia .td2 {
+            width: 12vw;
+            font-size: 16px;
+            height: 50px;
+            line-height: 35px;
+        }
+
+        .pingjia .tdsubmit {
+            width: 90vw;
+            font-size: 16px;
+            height: 50px;
+            line-height: 35px;
+        }
+
+        .pingjia .td3 {
+            width: 12vw;
+            font-size: 28px;
+            height: 50px;
+            line-height: 35px;
+            border-top: 0px;
+        }
+
+        .pingjia .td4 {
+            height: 50px;
+            font-size: 18px;
+            height: 30px;
+            line-height: 35px;
+            border-top: 0px;
+        }
+
+        .pingjia .radiusright {
+            border-right: 0px;
+            border-radius: 0px 9px 0px 0px
+        }
+
+        .pingjia .radiusleft {
+            border-left: 0px;
+            border-radius: 9px 0px 0px 0px
+        }
+
+        .pingjia .topbar1 p {
+        	width: 100%;
+            text-align: center;
+            font-size: 35px;
+            line-height: 45px;
+        }
+
+        .pingjia .contenttext1{
+        	line-height: 50px;
+        	text-align: center;
+        	font-size: 24px;
+        	font-weight: bold;
+        }
+			
+		.pingjia .back{
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			width: 40px;
+			height: 40px;
+			background: url(../chart/img/back.png) no-repeat center center;
+			background-size: 100% 100%;
+			z-index: 10;
+		}

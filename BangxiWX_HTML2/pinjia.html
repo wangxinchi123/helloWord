@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+		@font-face {
+			font-family: '方正喵呜体';
+			src: url('http://qiniu.claydai.cn/%E6%96%B9%E6%AD%A3%E5%96%B5%E5%91%9C%E4%BD%93.ttf');
+		}
+		
+		* {
+			margin: 0px;
+			padding: 0px;
+			font-family: '方正喵呜体';
+		}
+		#line{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 9;
+		}
+		html,body{
+			width: 100%;
+			height: auto;
+		}
+		.pingjia {
+            /*display: none;*/
+        }
+
+
+        .pingjiaContent table {
+            margin: 5px auto;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .submitbtn {
+            font-size: 15px;
+            height: 45px;
+            color: white;
+            background: linear-gradient(rgb(128, 183, 212), rgb(86, 151, 192), rgb(30, 111, 169), rgb(15, 99, 160), rgb(15, 96, 154));
+            width: 200px;
+            text-align: center;
+            line-height: 45px;
+            margin: 5px 5px;
+            border: 0px solid;
+            border-radius: 25px;
+        }
+
+        .pingjiaContent tr {
+            height: 35px;
+            border: 0px;
+        }
+        .pingjiaContent tr td{
+        	position: relative;
+        }
+		td img{
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+		}
+        .td1 {
+            width: 30vw;
+            font-size: 18px;
+            height: 50px;
+            line-height: 35px;
+        }
+
+        .td2 {
+            width: 12vw;
+            font-size: 16px;
+            height: 50px;
+            line-height: 35px;
+        }
+
+        .tdsubmit {
+            width: 90vw;
+            font-size: 16px;
+            height: 50px;
+            line-height: 35px;
+        }
+
+        .td3 {
+            width: 12vw;
+            font-size: 28px;
+            height: 50px;
+            line-height: 35px;
+            border-top: 0px;
+        }
+
+        .td4 {
+            height: 50px;
+            font-size: 18px;
+            height: 30px;
+            line-height: 35px;
+            border-top: 0px;
+        }
+
+        .radiusright {
+            border-right: 0px;
+            border-radius: 0px 9px 0px 0px
+        }
+
+        .radiusleft {
+            border-left: 0px;
+            border-radius: 9px 0px 0px 0px
+        }
+
+        .td5 {
+        	width: 100%;
+            text-align: center;
+            font-size: 35px;
+            line-height: 45px;
+        }
+
+        .contenttext{
+        	line-height: 50px;
+        	text-align: center;
+        	font-size: 24px;
+        	font-weight: bold;
+        }
+			
+		.back{
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			width: 40px;
+			height: 40px;
+			background: url(img/back.png) no-repeat center center;
+			background-size: 100% 100%;
+			z-index: 10;
+		}
+    </style>
+	</head>
+	<body>
+		<div id="line"></div>
+		<div class="pingjia">
+        <div class="topbar">
+        	<div class="back"></div>
+            <p class="td5">自我评价</p>
+        </div>
+
+        <div class="contenttext">
+            与同龄人相比，给自己能力打分
+        </div>
+        <div class="pingjiaContent">
+            <table rules=none cellspacing=0 align=center>
+                <tbody>
+
+                <tr>
+                    <td class="td4 radiusleft">能力/分值</td>
+                    <td class="td3" id="g1">1</td>
+
+                    <td class="td3" id="g2">2</td>
+
+                    <td class="td3" id="g3">3</td>
+
+                    <td class="td3" id="g4">4</td>
+                    <td class="td3 radiusright" id="g5">5</td>
+
+                </tr>
+
+                <tr>
+                    <td class="td1">机械操作能力</td>
+                    <td class="td2" id="11"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="12"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="13"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="14"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="15"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td1">科学研究能力</td>
+                    <td class="td2" id="21"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="22"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="23"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="24"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="25"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td1">艺术创作能力</td>
+                    <td class="td2" id="31"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="32"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="33"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="34"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="35"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td1">解释表达能力</td>
+                    <td class="td2" id="41"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="42"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="43"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="44"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="45"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">商业洽谈能力</td>
+                    <td class="td2" id="51"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="52"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="53"><img src="img/weixuanzhong.png" width="15" height="25"></td>
+
+                    <td class="td2" id="54"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="55"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">事务执行能力</td>
+                    <td class="td2" id="61"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="62"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="63"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="64"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="65"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">体育技能</td>
+                    <td class="td2" id="71"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="72"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="73"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="74"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="75"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">数学技能</td>
+                    <td class="td2" id="81"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="82"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="83"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="84"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="85"><img src="img/weixuanzhong.png" ></td>
+
+                </tr>
+
+                <tr>
+                    <td class="td1">音乐技能</td>
+                    <td class="td2" id="91"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="92"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="93"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="94"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="95"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">交际技能</td>
+                    <td class="td2" id="a1"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="a2"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="a3"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="a4"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="a5"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">领导技能</td>
+                    <td class="td2" id="b1"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="b2"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="b3"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="b4"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="b5"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1 ">办公技能</td>
+                    <td class="td2" id="c1"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="c2"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="c3"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="c4"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2 " id="c5"><img src="img/weixuanzhong.png" ></td>
+
+                        <input type="hidden" name="pingjia" id="pingjiainput" value="">
+
+                </tr>
+
+                </tbody>
+            </table>
+            <center>
+                <input class="submitbtn" type="button" value="提交" onclick="sub()">
+            </center>
+
+        </div>
+    </div>
+    
+    <script src="chart/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/pinjia.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

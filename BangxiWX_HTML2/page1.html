@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="css/page1.css"/>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+    	<script type="text/javascript" src="js/imgMain.js"></script>
+    	<script src="js/errorMessage.js"></script>
+	</head>
+	<body onload="onload()">
+<form action="" method="" id="myForm">
+    <div class="swiper-container swiper-no-swiping">
+        <div class="swiper-wrapper swiper-no-swiping ">
+
+            <!-- 页面1 -->
+            <div id="page1" class=" swiper-slide page swiper-no-swiping">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a><span class="btn1">应雄辈出测评</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>开始</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="content1 ">
+                    <div class="contenttext">
+                        如果有机会让你到以下地区旅游,不考虑费用等问题,请将这六个选项进行排序,由最想去的一个开始。
+                    </div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 1; i < 7; i++) {
+                                    var htmStr = "<li id=\"p1li" + i + "\" class=\"p1li\" style=\"background-image: url(" + myImg[i][0] + ")\">" +
+                                            "<span id=\"p1span" + i + "\" class=\"p1span\"> </span><span id=\"p1spans" + i + "\" class=\"p1spans\">" +
+                                            "<a>" + myImg[i][1] + "</a></span>" +
+                                            "<input type='hidden' name=\"page1[]\" id='p1liinput" + i + "' value=''/></li>"
+                                    document.write(htmStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+                </div>
+            </div>
+
+            <!-- 页面2 -->
+            <div id="page2" class=" swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a><span class="btn1">开始</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>1/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 0; i < 9; i++) {
+                                    var htmStr = "<li id=\"p2li" + (i + 1) + "\" class=\"p2li\" style=\"background-image: url(" + myImage[i][0] + ")\">" +
+                                            "<span id=\"p2span" + (i + 1) + "\" class=\"p2span\"> </span><span id=\"p2spans" + (i + 1) + "\" class=\"p2spans\">" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name=\"page2[]\" id='p2liinput" + (i + 1) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+
+                </div>
+            </div>
+
+            <!-- 页面3 -->
+            <div id="page3" class=" swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a><span class="btn1">上一步</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>2/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 9; i < 18; i++) {
+                                    var htmlStr = "<li id='p3li" + (i - 8) + "' class='p2li' style='background-image: url(" + myImage[i][0] + ")'>" +
+                                            "<span id='p3span" + (i - 8) + "' class='p2span'> </span><span id='p3spans" + (i - 8) + "' class='p2spans'>" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name='page2[]' id='p3liinput" + (i - 8) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmlStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+                </div>
+            </div>
+
+            <!-- 页面4 -->
+            <div id="page4" class="swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a> <span class="btn1">上一步</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>3/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 18; i < 27; i++) {
+                                    var htmlStr = "<li id='p4li" + (i - 17) + "' class='p2li' style='background-image: url(" + myImage[i][0] + ")'>" +
+                                            "<span id='p4span" + (i - 17) + "' class='p2span'> </span><span id='p4spans" + (i - 17) + "' class='p2spans'>" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name='page2[]' id='p4liinput" + (i - 17) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmlStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+
+                </div>
+            </div>
+
+            <!-- 页面5 -->
+            <div id="page5" class="swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a><span class="btn1">上一步</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>4/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 27; i < 36; i++) {
+                                    var htmlStr = "<li id='p5li" + (i - 26) + "' class='p2li' style='background-image: url(" + myImage[i][0] + ")'>" +
+                                            "<span id='p5span" + (i - 26) + "' class='p2span'> </span><span id='p5spans" + (i - 26) + "' class='p2spans'>" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name='page2[]' id='p5liinput" + (i - 26) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmlStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+
+                </div>
+            </div>
+
+            <!-- 页面6 -->
+            <div id="page6" class="swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a> <span class="btn1">上一步</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>5/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 36; i < 45; i++) {
+                                    var htmlStr = "<li id='p6li" + (i - 35) + "' class='p2li' style='background-image: url(" + myImage[i][0] + ")'>" +
+                                            "<span id='p6span" + (i - 35) + "' class='p2span'> </span><span id='p6spans" + (i - 35) + "' class='p2spans'>" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name='page2[]' id='p6liinput" + (i - 35) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmlStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+
+                </div>
+            </div>
+
+            <!-- 页面7 -->
+            <div id="page7" class="swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a><span class="btn1">上一步</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>6/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 45; i < 54; i++) {
+                                    var htmlStr = "<li id='p7li" + (i - 44) + "' class='p2li' style='background-image: url(" + myImage[i][0] + ")'>" +
+                                            "<span id='p7span" + (i - 44) + "' class='p2span'> </span><span id='p7spans" + (i - 44) + "' class='p2spans'>" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name='page2[]' id='p7liinput" + (i - 44) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmlStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+
+                </div>
+            </div>
+
+            <!-- 页面8 -->
+            <div id="page8" class="swiper-slide page ">
+                <div class="topbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <a><span class="btn1">上一步</span></a>
+                            </td>
+                            <td class="td5">
+                                <a>7/7</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="jingdutiao">
+					<div class="line1">
+					</div>
+					<div class="line2">
+					</div>
+				</div>
+                <div class="contentb">
+                    <div class="contenttext">在下面若干种活动中,选取你擅长或者喜欢的活动,可以不选或多选。</div>
+                    <center>
+                        <ul>
+                            <script>
+                                for (var i = 54; i < 60; i++) {
+                                    var htmlStr = "<li id='p8li" + (i - 53) + "' class='p2li' style='background-image: url(" + myImage[i][0] + ")'>" +
+                                            "<span id='p8span" + (i - 53) + "' class='p2span'> </span><span id='p8spans" + (i - 53) + "' class='p2spans'>" +
+                                            "<a>" + myImage[i][1] + "</a></span>" +
+                                            "<input type='hidden' name='page2[]' id='p8liinput" + (i - 53) + "' value='" + myImage[i][2] + "0'/></li>"
+                                    document.write(htmlStr);
+                                }
+                            </script>
+                        </ul>
+                    </center>
+
+                </div>
+           </div>
+        </div>
+    </div>
+
+    <div class="btnnext">下一步</div>
+    <!-- pingjia -->
+		<div class="pingjia">
+			<div id="line"></div>
+        <div class="topbar1">
+        	<div class="back"></div>
+            <p>自我评价</p>
+        </div>
+
+        <div class="contenttext1">
+            与同龄人相比，给自己能力打分
+        </div>
+        <div class="pingjiaContent">
+            <table rules=none cellspacing=0 align=center>
+                <tbody>
+
+                <tr>
+                    <td class="td4 radiusleft">能力/分值</td>
+                    <td class="td3" id="g1">1</td>
+
+                    <td class="td3" id="g2">2</td>
+
+                    <td class="td3" id="g3">3</td>
+
+                    <td class="td3" id="g4">4</td>
+                    <td class="td3 radiusright" id="g5">5</td>
+
+                </tr>
+
+                <tr>
+                    <td class="td1">机械操作能力</td>
+                    <td class="td2" id="11"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="12"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="13"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="14"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="15"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td1">科学研究能力</td>
+                    <td class="td2" id="21"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="22"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="23"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="24"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="25"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td1">艺术创作能力</td>
+                    <td class="td2" id="31"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="32"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="33"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="34"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="35"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td1">解释表达能力</td>
+                    <td class="td2" id="41"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="42"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="43"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="44"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="45"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">商业洽谈能力</td>
+                    <td class="td2" id="51"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="52"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="53"><img src="img/weixuanzhong.png" width="15" height="25"></td>
+
+                    <td class="td2" id="54"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="55"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">事务执行能力</td>
+                    <td class="td2" id="61"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="62"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="63"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="64"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="65"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">体育技能</td>
+                    <td class="td2" id="71"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="72"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="73"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="74"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="75"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">数学技能</td>
+                    <td class="td2" id="81"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="82"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="83"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="84"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="85"><img src="img/weixuanzhong.png" ></td>
+
+                </tr>
+
+                <tr>
+                    <td class="td1">音乐技能</td>
+                    <td class="td2" id="91"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="92"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="93"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="94"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="95"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">交际技能</td>
+                    <td class="td2" id="a1"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="a2"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="a3"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="a4"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="a5"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1">领导技能</td>
+                    <td class="td2" id="b1"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="b2"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="b3"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="b4"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2" id="b5"><img src="img/weixuanzhong.png" ></td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="td1 ">办公技能</td>
+                    <td class="td2" id="c1"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="c2"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="c3"><img src="img/weixuanzhong.png" ></td>
+
+                    <td class="td2" id="c4"><img src="img/weixuanzhong.png" ></td>
+                    <td class="td2 " id="c5"><img src="img/weixuanzhong.png" ></td>
+
+                        <input type="hidden" name="pingjia" id="pingjiainput" value="">
+                         <input type="hidden" name="openid" id="openid" value="22">
+
+                </tr>
+
+                </tbody>
+            </table>
+            <center>
+                <input class="submitbtn" type="button" value="提交" onclick="sub()">
+            </center>
+
+        </div>
+    </div>
+</form>
+<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/pinjia.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="js/page1.js"></script>
+	</body>
+</html>

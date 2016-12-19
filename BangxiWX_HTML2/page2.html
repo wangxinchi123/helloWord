@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/page2.css" />
+	</head>
+
+	<body>
+		<div id='wx_pic' style='margin:0 auto;display:none;'>
+			<img src='img/logo.png' />
+		</div>
+
+		<h4 id="div">
+    首先,请你选择<a style="color: red;">最看重的</a>一项
+		</h4>
+
+		<ul>
+			<li id="1">工资高、福利好<span id="span1"></span>
+			</li>
+			<li id="2">工作环境（物质）方面舒适<span id="span2"></span>
+			</li>
+			<li id="3">人际关系良好<span id="span3"></span>
+			</li>
+			<li id="4">工作稳定有保障<span id="span4"></span>
+			</li>
+			<li id="5">能提供较好受教育机会<span id="span5"></span>
+			</li>
+			<li id="6">有较高社会地位<span id="span6"></span>
+			</li>
+			<li id="7">工作不太紧张、外部压力小<span id="span7"></span>
+			</li>
+			<li id="8">能充分发挥自己能力特长<span id="span8"></span>
+			</li>
+			<li id="9">社会需要和社会贡献大<span id="span9"></span>
+			</li>
+		</ul>
+		<div style="font-size:20px;" id="html"></div>
+		<center>
+			<form action="" id="myForm">
+				<input id="content" name="content" type="hidden" value="">
+				 <input type="hidden" name="openid" id="openid" value="22">
+				<input id="buttonSubmit" type="button" value="下一步" disabled="true" onclick="sub()">
+			</form>
+		</center>
+		<script src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/errorMessage.js"></script>
+		<script src="js/page2.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

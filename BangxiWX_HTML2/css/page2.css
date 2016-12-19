@@ -1,0 +1,62 @@
+@font-face {
+            font-family: '方正喵呜体';
+            src: url('http://qiniu.claydai.cn/%E6%96%B9%E6%AD%A3%E5%96%B5%E5%91%9C%E4%BD%93.ttf');
+        }
+        * {
+            margin: 0px;
+            padding: 0px;
+
+            font-family: 方正喵呜体;
+        }
+
+        ul {
+            list-style: none;
+            border-top: 1px rgb(236, 236, 236) solid;
+        }
+
+        ul li {
+            display: block;
+            padding-left: 15px;
+            width: calc(100% - 15px);
+            background: white;
+            height: 48px;
+            border-bottom: 1px rgb(236, 236, 236) solid;
+            line-height: 48px;
+            font-size: 16px;
+            color: black;
+        }
+
+        span {
+            font-size: 25px;
+            color: red;
+            float: right;
+            display: block;
+            width: 30px;
+            height: 30px;
+            line-height: 35px;
+            background: #FFFFCC;
+            border: 0px;
+            border-radius: 25px;
+            text-align: center;
+            display: none;
+            margin-top: 7px;
+            margin-right: 10px;
+        }
+
+        h4 {
+            text-align: center;
+            margin: 10px;
+        }
+
+        #buttonSubmit {
+            width: 80%;
+            height: 35px;
+            line-height: 35px;
+            font-size: 16px;
+            background: linear-gradient(rgb(128, 183, 212), rgb(86, 151, 192),
+            rgb(30, 111, 169), rgb(15, 99, 160), rgb(15, 96, 154));
+            border: 0px;
+            border-radius: 20px;
+            color: white;
+            margin-top: 10px;
+        }

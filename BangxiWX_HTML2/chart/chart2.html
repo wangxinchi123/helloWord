@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>应雄辈出测评结果</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=0.8, minimum-scale=0.8, maximum-scale=0.8, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <style>
+        @font-face {
+            font-family: '方正喵呜体';
+            src: url('http://qiniu.claydai.cn/%E6%96%B9%E6%AD%A3%E5%96%B5%E5%91%9C%E4%BD%93.ttf');
+        }
+
+        #box {
+            width: 100%;
+            text-align: center;
+            margin: 5px auto;
+
+            height: 500px;
+        }
+
+        .content_02 {
+            font-size: 18px;
+            color: red;
+            text-align: center;
+        }
+
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: '方正喵呜体';
+        }
+        #first{
+            width: 100%;
+            height: auto;
+        }
+		#first p{
+			text-align: left;
+			margin-left:3em;
+			line-height: 26px;
+			/*font-family:"微软雅黑" ;*/
+			color: gray;
+		}
+        .top_text{
+            padding: 30px 0!important;
+            width: 100%;
+            font-size: 25px!important;
+            color: darkgray!important;
+            text-align: center!important;
+        }
+        .foot_text{
+            padding: 10px 0!important;
+            width: 100%;
+            font-size: 23px!important;
+            color: orangered!important;
+            text-align: center!important;
+        }
+        #first .logo{
+            width: 100%;
+            height: auto;
+        }
+        #first img{
+            width: 23px;
+            height: 23px;
+        }
+        button{
+        	width: 90%;
+        	height: 60px;
+        	margin: 0 auto;
+        	border: none;
+        	border-radius: 5px;
+        	background-color: #63a8fe;
+        	color: white;
+        	margin: 10px 0 20px;
+        	font-size: 20px;
+        	-webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        #bg{
+        	position: fixed;
+        	top: 0;
+        	left: 0;
+        	width: 100%;
+        	height: 100%;
+        	background: url(img/黑透.png) no-repeat;
+        	background-size: 100% 100%;
+        	z-index: 20;
+        	display: none;
+        }
+        .xiaoyuandian{
+        	float: left;
+        	width: 7px;
+        	height: 7px;
+        	margin-top: 8px;
+        	margin-left: calc(2em - 5px);
+        	border-radius: 50%;
+        	background-color: gray;
+        }
+    </style>
+
+</head>
+<body>
+<br>
+<p class="foot_text">应雄辈出将保留你的测评数据 </p>
+<p class="foot_text">毕业前10家企业会主动邀请你参加面试</p>
+<div id='wx_pic' style='margin:0 auto;display:none;'>
+    <img src='img/logo.png' />
+</div>
+<div id="bg"></div>
+
+<div id="box">
+
+
+    <canvas id="radar" width="420px" height="420px"></canvas>
+
+
+    <div id="first">
+
+    </div>
+    
+    <button id="metoo">我也要测</button>
+
+
+</div>
+<script src="../js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="html2canvas.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="chart.radar.js"></script>
+<script type="text/javascript">
+	
+	$("#metoo").on("click",function(){
+		window.location.href = "../index.html";
+	});
+//	var types = [];
+//	types[1] = "企业型";
+//	types[2] = "艺术型";
+//	types[3] = "社会型";
+//	types[4] = "调研型";
+//	types[5] = "常规型";
+//	types[6] = "实际型";
+	
+	var results = [];
+	for(var i=0;i<7;i++){
+		results[i] = [];
+	}
+	//企业型
+	results[1][0] = "追求权力、权威和物质财富，具有领导才能。";
+	results[1][1] = "习惯以利益得失，权利、地位、金钱等来衡量做事的价值，做事有较强的目的性。";
+	results[1][2] = "喜欢从事竞争、冒风险、以实现经济目标的工作。";
+	//社会型
+	results[3][0] = "喜欢与人交往、不断结交新的朋友、善言谈、愿意教导别人。";
+	results[3][1] = "热衷于分享信息，对他人需求敏感，希望善解人意又受大众欢迎。";
+	results[3][2] = "喜欢从事提供信息、启迪、帮助、培训、开发或治疗等事务工作。";
+	//艺术型
+	results[2][0] = "乐于创造新颖，渴望表现自己的个性。";
+	results[2][1] = "倾向于和他人用某种艺术媒介沟通胜过直接沟通，喜欢需要个性表达或感官融入的任务。";
+	results[2][2] = "喜欢松散与灵活的，鼓励创新与审美的工作环境，讨厌按部就班工作。";
+	//调研型
+	results[4][0] = "擅长思考，不愿动手，思想家而非实干家，抽象思维能力强，求知欲强。";
+	results[4][1] = "喜欢逻辑分析和推理，不断探讨未知的领域，考虑问题理性，做事喜欢精确。";
+	results[4][2] = "喜欢智力的、抽象的、分析的、独立的定向任务工作，但不擅长领导别人。";
+	//常规型
+	results[5][0] = "喜欢按计划办事，细心、有条理，习惯接受他人的指挥和领导，尊重权威和规章制度。";
+	results[5][1] = "喜欢关注实际和细节情况，较为谨慎和保守，不喜欢冒险和竞争。";
+	results[5][2] = "喜欢要求注意细节、精确度高、文字信息等处理类工作。";
+	//实际型
+	results[6][0] = "喜欢身体协调、技术和体力的实际操作类活动。";
+	results[6][1] = "偏好于具体任务，不善言辞，做事保守，较为谦虚。缺乏社交能力，通常喜欢独立做事。";
+	results[6][2] = "喜欢与使用工具、机器，需要基本操作技能的工作。";
+	
+	//获取分数最高的三个类型
+	var maxScoreType1=0,maxScoreType2=0,maxScoreType3=0;
+	for(var i=1;i<7;i++){
+		if(maxScoreType1 == 0 ||　getPar("score"+maxScoreType1)<parseInt(getPar("score"+i))){
+			maxScoreType1 = i;
+		}
+	}
+	for(var i=1;i<=6;i++){
+		if(maxScoreType2 == 0 || getPar("score"+maxScoreType2)<parseInt(getPar("score"+i))){
+			if(maxScoreType1 != i){
+				maxScoreType2 = i;
+			}
+		}
+	}
+	for(var i=1;i<=6;i++){
+		if(maxScoreType3 == 0 || getPar("score"+maxScoreType3)<parseInt(getPar("score"+i))){
+			if(maxScoreType1 != i && maxScoreType2 != i){
+				maxScoreType3 = i;
+			}
+		}
+	}
+	results[maxScoreType1].sort(function(){ return 0.5 - Math.random() });
+	results[maxScoreType2].sort(function(){ return 0.5 - Math.random() });
+	results[maxScoreType3].sort(function(){ return 0.5 - Math.random() });
+	
+	var str1 = "<div class='xiaoyuandian'></div><p>"+results[maxScoreType1][0]+"</p><div class='xiaoyuandian'></div><p>"+results[maxScoreType1][1]+"</p><div class='xiaoyuandian'></div><p>"+results[maxScoreType1][2]+"</p>";
+	var str2 = "<div class='xiaoyuandian'></div><p>"+results[maxScoreType2][0]+"</p><div class='xiaoyuandian'></div><p>"+results[maxScoreType2][1]+"</p><div class='xiaoyuandian'></div><p>"+results[maxScoreType2][2]+"</p>";
+	var str3 = "<div class='xiaoyuandian'></div><p>"+results[maxScoreType3][0]+"</p><div class='xiaoyuandian'></div><p>"+results[maxScoreType3][1]+"</p><div class='xiaoyuandian'></div><p>"+results[maxScoreType3][2]+"</p>";
+	$("#first").html(str1+str2+str3);
+	
+    function getPar(par) {
+        //获取当前URL
+        var local_url = document.location.href;
+        //获取要取得的get参数位置
+        var get = local_url.indexOf(par + "=");
+        if (get == -1) {
+            return false;
+        }
+        //截取字符串
+        var get_par = local_url.slice(par.length + get + 1);
+        //判断截取后的字符串是否还有其他get参数
+        var nextPar = get_par.indexOf("&");
+        if (nextPar != -1) {
+            get_par = get_par.slice(0, nextPar);
+        }
+        return get_par;
+    }
+    window.onload = function () {
+
+        localStorage.url=window.location.href;
+
+        Radar.setOptions({
+            element: 'radar',
+            radius: 140,
+            polar: [
+                {text: '企业型' + getPar("score1"), max: 100, icon: {sx: 0, sy: 0, w: 32, h: 33, l: -17, t: -60}},
+                {text: '艺术型' + getPar("score2"), max: 100, icon: {sx: 32, sy: 0, w: 30, h: 33, l: 30, t: -30}},
+                {text: '社会型' + getPar("score3"), max: 100, icon: {sx: 61, sy: 0, w: 62, h: 33, l: 10, t: 0}},
+                {text: '调研型' + getPar("score4"), max: 100, icon: {sx: 93, sy: 0, w: 72, h: 6, l: -40, t: 0}},
+                {text: '常规型' + getPar("score5"), max: 100, icon: {sx: 93, sy: 0, w: 0, h: 33, l: -40, t: 0}},
+                {text: '实际型' + getPar("score6"), max: 100, icon: {sx: 124, sy: 0, w: 29, h: 33, l: -60, t: -30}}
+            ],
+            title: decodeURI(getPar("name")),
+            data: [getPar("score1"), getPar("score2"), getPar("score3"), getPar("score4"), getPar("score5"), getPar("score6")],
+            styles: {
+                label: {
+                    image: '1.png'
+                }
+            }
+        }).init();
+		
+		
+//        html2canvas(document.body, {
+//            onrendered: function (canvas) {
+//                var url1 = canvas.toDataURL("image/png");
+//                var Img1 = new Image();
+//                Img1.src = url1;
+//                document.body.appendChild(Img1);
+//            }
+//        });
+//        var canvas = document.getElementById("radar");
+//        var img = convertCanvasToImage(canvas);
+//        document.getElementById("box").remove();
+//        document.body.appendChild(img);
+    }
+
+//    function convertCanvasToImage(canvas) {
+//        var image = new Image();
+//        image.src = canvas.toDataURL("image/png");
+//        alert(image.src);
+//        return image;
+//    }
+</script>
+
+</body>
+</html>
